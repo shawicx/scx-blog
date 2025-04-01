@@ -2,9 +2,8 @@
  * @Author: shawicx d35f3153@proton.me
  * @Date: 2025-03-28 17:26:27
  * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-04-01 21:24:24
- * @FilePath: .vitepress/config.mts
- * @Description: 这是默认设置,可以在设置》工具》File Description中进行配置
+ * @LastEditTime: 2025-04-02 00:18:28
+ * @Description: vitepress 配置文件
  */
 import { defineConfig } from 'vitepress'
 
@@ -38,10 +37,10 @@ export default defineConfig({
   description: "个人博客",
   lang: 'zh-CN',
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/assets/favicon/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/public/favicon/favicon.ico' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/assets/favicon/favicon-32x32.png',
+    logo: '/public/favicon/favicon-32x32.png',
     nav: [
       { text: '首页', link: '/' },
       { text: '工作记录', link: '/work-docs', activeMatch: '/work-docs' },
