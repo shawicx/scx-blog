@@ -7,6 +7,9 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/.history" />
       <excludeFolder url="file://$MODULE_DIR$/.vitepress/cache/deps" />
+      <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/scattered-notes" />
+      <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/work-docs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

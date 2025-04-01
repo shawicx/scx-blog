@@ -2,3 +2,4 @@
 node_modules/*
 *.log
 .vitepress/cache/*
+.vitepress/dist/*

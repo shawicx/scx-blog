@@ -13,6 +13,9 @@ hero:
     - theme: brand
       text: 工作记录
       link: /work-docs
+    - theme: alt
+      text: 学习笔记
+      link: /study-notes
 
 features:
   - title: Feature A

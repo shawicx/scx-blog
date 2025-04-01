@@ -2,7 +2,7 @@
  * @Author: shawicx d35f3153@proton.me
  * @Date: 2025-03-28 17:26:27
  * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-04-01 20:25:04
+ * @LastEditTime: 2025-04-01 21:21:17
  * @FilePath: .vitepress/config.mts
  * @Description: 这是默认设置,可以在设置》工具》File Description中进行配置
  */
@@ -34,6 +34,7 @@ const generateSidebarItems = (items: SidebarItem[], prefix: string) => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '.',
   title: "shawicx",
   description: "个人博客",
   lang: 'zh-CN',
