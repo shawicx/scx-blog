@@ -2,7 +2,7 @@
  * @Author: shawicx d35f3153@proton.me
  * @Date: 2025-03-28 17:26:27
  * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-04-02 00:18:28
+ * @LastEditTime: 2025-04-02 00:21:55
  * @Description: vitepress 配置文件
  */
 import { defineConfig } from 'vitepress'
@@ -37,10 +37,10 @@ export default defineConfig({
   description: "个人博客",
   lang: 'zh-CN',
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/public/favicon/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/favicon/favicon.ico' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/public/favicon/favicon-32x32.png',
+    logo: '/favicon/favicon-32x32.png',
     nav: [
       { text: '首页', link: '/' },
       { text: '工作记录', link: '/work-docs', activeMatch: '/work-docs' },
