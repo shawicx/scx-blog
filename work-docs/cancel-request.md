@@ -1,9 +1,54 @@
+# 取消重复请求
+
 1. 请求发出，以 url + params 生成 请求的key，将key添加到 队列中。
 2. 请求完成，将key 从队列中删除。
 3. 请求未完成，再次发出请求，判断队列中是否存在key，若存在，将请求取消。
 4. 可通过设置白名单规避取消重复请求的逻辑。
 
-```typescript
+## 使用 AbortController
+
+```ts
+// 请求队列
+const pendingRequests = new Map();
+
+function hashObject(obj: unknown): string {
+  const str = JSON.stringify(obj);
+  // 使用简单的哈希算法，在实际使用时可以选择 crypto
+  return str.split('').reduce((hash, char) => {
+    return ((hash << 5) - hash) + char.charCodeAt(0) | 0;
+  }, 0).toString(36);
+}
+
+// 根据请求得到的唯一值，用于取消重复请求
+function getRequestKey(
+  url: string,
+  { method, params, data }: AxiosRequestConfig,
+): string {
+  // 使用 URL 对象处理 url
+  const urlObj = new URL(url, window.location.origin);
+
+  // 使用 crypto 生成更短的唯一标识
+  const paramsHash = params ? hashObject(params) : '';
+  const dataHash = data ? hashObject(data) : '';
+
+  return `${method}:${urlObj.pathname}:${paramsHash}:${dataHash}`;
+}
+
+// 生成请求键值
+const requestKey = getRequestKey(url, config);
+const { signal } = controller;
+config.signal = signal;
+// 如果重复请求,取消前一个
+if (pendingRequests.has(requestKey)) {
+  pendingRequests.get(requestKey).abort();
+}
+pendingRequests.set(requestKey, controller);
+
+```
+
+## ~~使用 axios cancelToken~~
+
+```ts
 const WHITE_LIST: string[] = [];
 
 // 已发请求
@@ -53,6 +98,7 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use((config) => {
   // 从pendingRequest对象中移除请求
-  removePendingRequest(response.config); 
+  removePendingRequest(response.config);
 })
 ```
+

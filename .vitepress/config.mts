@@ -2,7 +2,7 @@
  * @Author: shawicx d35f3153@proton.me
  * @Date: 2025-03-28 17:26:27
  * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-04-02 00:21:55
+ * @LastEditTime: 2025-04-05 10:02:27
  * @Description: vitepress 配置文件
  */
 import { defineConfig } from 'vitepress'
@@ -56,6 +56,7 @@ export default defineConfig({
             { text: '取消请求', link: 'cancel-request' },
             { text: 'TPLink路由器', link: 'TPLink' },
             { text: '视频监控', link: 'video-monitoring' },
+            { text: 'axios封装', link: 'encapsulated-axios' },
           ], NavPath.WorkDocs)
         }
       ],
@@ -64,7 +65,7 @@ export default defineConfig({
           text: '基础知识',
           collapsed: true,
           items: generateSidebarItems([
-            { text: 'HTTP', link: 'http' },
+            { text: 'http', link: 'http' },
             { text: '坐标系', link: 'coordinate-system' },
             { text: '节流防抖', link: 'debounce-throttle' },
             { text: '深浅克隆', link: 'js-clone' },

@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/assets" />
       <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/scattered-notes" />
       <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/work-docs" />
+      <excludeFolder url="file://$MODULE_DIR$/.vitepress/dist/favicon" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
