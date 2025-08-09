@@ -1,3 +1,10 @@
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2025-04-03 13:58:46
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:45:52
+ * @Description: 
+-->
 # Promise
 
 ## 核心概念

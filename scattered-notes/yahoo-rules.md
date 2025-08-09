@@ -1,3 +1,10 @@
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2024-06-23 00:57:25
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:46:01
+ * @Description: 
+-->
 # 雅虎军规
 
 ### 1. 尽可能减少HTTP请求

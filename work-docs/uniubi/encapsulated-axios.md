@@ -1,3 +1,10 @@
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2025-04-05 09:40:15
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:44:17
+ * @Description: 
+-->
 # 封装 axios 方法
 
 ```ts

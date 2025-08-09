@@ -1,3 +1,12 @@
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2024-06-23 00:59:14
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:45:23
+ * @Description: 
+-->
+# HTTP
+
 ## URI和URL
 
 1. URI(统一资源标识符)，用来唯一的标识一个资源。

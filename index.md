@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "shawicx"
   text: "工作、学习文档"
-  # tagline: My great project tagline
+  tagline: 知识是一片荒原
   actions:
     # - theme: alt
     #   text: Markdown Examples
@@ -14,16 +14,8 @@ hero:
       text: 工作记录
       link: /work-docs
     - theme: alt
-      text: 学习笔记
-      link: /study-notes
-
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      text: 零散笔记
+      link: /scattered-notes
 ---
 
 ## Vercel 部署 404
@@ -47,4 +39,3 @@ vercel 设置中，vitepress 项目的默认配置存在问题，需要修改 bu
   ]
 }
 ```
-

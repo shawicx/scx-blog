@@ -1,4 +1,13 @@
-### 节流: 规定时间段内只执行一次事件
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2024-06-23 11:53:22
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:44:55
+ * @Description: 
+-->
+# 节流与防抖
+
+## 节流: 规定时间段内只执行一次事件
 
 ```typescript
 function throttle(fn, delay) {
@@ -29,9 +38,7 @@ function throttle(fn, delay) {
 }
 ```
 
-\<a name="Ri5P8">\</a>
-
-### 防抖: 事件在n秒内才执行，如果n秒内再次触发，以新的事件时间为准重新计时，n秒后再执行
+## 防抖: 事件在n秒内才执行，如果n秒内再次触发，以新的事件时间为准重新计时，n秒后再执行
 
 ```typescript
 function debounce(fn, delay) {

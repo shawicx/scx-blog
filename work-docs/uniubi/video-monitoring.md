@@ -1,3 +1,12 @@
+<!--
+ * @Author: shawicx d35f3153@proton.me
+ * @Date: 2025-03-28 19:14:12
+ * @LastEditors: shawicx d35f3153@proton.me
+ * @LastEditTime: 2025-08-09 09:40:35
+ * @Description: 
+-->
+# 视频监控
+
 ## 1. 平台端
 
 ### 1.1 ehome 协议 缓冲很频繁
