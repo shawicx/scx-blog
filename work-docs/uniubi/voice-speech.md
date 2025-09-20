@@ -1,10 +1,3 @@
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2025-03-28 19:14:12
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:44:25
- * @Description: 
--->
 # 语音播报
 
 ## 原生API
@@ -36,14 +29,14 @@ constructor() {
 
 private async playNext (utteranceQueue): void => {
   const SpeechSynthesisUtterancePolyfill = utteranceQueue.shift();
-  
+
   this.speaking = false;
   if (utteranceQueue.length) {
     this.pending = true;
   } else {
     this.pending = false;
   }
-  
+
   if (SpeechSynthesisUtterancePolyfill) {
     this.audio.src = '-----';
    	await this.audio.play();
@@ -54,7 +47,7 @@ speak(SpeechSynthesisUtterancePolyfill: SpeechSynthesisUtterance) {
   this.pending = true;
   utteranceQueue.push(SpeechSynthesisUtterancePolyfill);
   if (this.speaking || this.paused) {
-    
+
   } else {
     this.playNext(utteranceQueue);
   }

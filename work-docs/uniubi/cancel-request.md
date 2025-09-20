@@ -1,10 +1,3 @@
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2025-03-28 19:14:12
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:44:13
- * @Description: 
--->
 # 取消重复请求
 
 1. 请求发出，以 url + params 生成 请求的key，将key添加到 队列中。
@@ -108,4 +101,3 @@ service.interceptors.response.use((config) => {
   removePendingRequest(response.config);
 })
 ```
-

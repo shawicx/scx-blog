@@ -70,7 +70,10 @@ export default defineConfig({
           text: "view-shine",
           collapsed: true,
           items: generateSidebarItems(
-            [{ text: "Vue 3 基本Api", link: "vue3-api" }],
+            [
+              { text: "Vue 3 基本Api", link: "vue3-api" },
+              { text: "BiMap 工具类", link: "bi-map" },
+            ],
             [NavPath.WorkDocs, "viewshine"],
           ),
         },

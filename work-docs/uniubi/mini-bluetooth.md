@@ -1,10 +1,3 @@
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2025-03-28 19:14:12
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:39:36
- * @Description: 
--->
 # 小程序蓝牙
 
 ## 目录
