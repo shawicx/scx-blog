@@ -170,7 +170,7 @@ const entries = biMap.entries(); // [[1, '启用'], [0, '禁用']]
 
 **示例:**
 ```typescript
-const items = biMap.toArray(); 
+const items = biMap.toArray();
 // [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]
 ```
 
@@ -186,7 +186,7 @@ BiMapFactory 提供了创建和转换 BiMap 的静态方法，并包含缓存优
 
 **返回值:** BiMap 实例
 
-**特性:** 
+**特性:**
 - 使用 WeakMap 缓存，相同的数组引用会返回缓存的 BiMap 实例
 - 提高性能，避免重复创建
 
