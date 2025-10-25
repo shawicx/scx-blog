@@ -1,3 +1,9 @@
+---
+title: 'Default Title'
+description: 'Default Description'
+draft: false
+---
+
 # Vue 3 常用 API 实战指南
 
 Vue 3 带来了许多激动人心的新特性，其中最重要的就是 Composition API。本文将通过丰富的示例来介绍 Vue 3 中最常用的 API，帮助你快速掌握 Vue 3 的核心功能。

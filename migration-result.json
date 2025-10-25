@@ -1,0 +1,104 @@
+{
+  "totalFiles": 24,
+  "migratedFiles": 24,
+  "failedFiles": 0,
+  "issues": [],
+  "mappings": [
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/QWEN.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/QWEN.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/final_constitution.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/final_constitution.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/updated_constitution.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/updated_constitution.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/TPLink.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/TPLink.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/cancel-request.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/cancel-request.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/encapsulated-axios.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/encapsulated-axios.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/mini-bluetooth.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/mini-bluetooth.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/video-monitoring.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/video-monitoring.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/uniubi/voice-speech.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/uniubi/voice-speech.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/viewshine/bi-map.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/viewshine/bi-map.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/viewshine/formatter.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/viewshine/formatter.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/work-docs/viewshine/vue3-api.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/work-docs/viewshine/vue3-api.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/array-dedup.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/array-dedup.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/coordinate-system.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/coordinate-system.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/debounce-throttle.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/debounce-throttle.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/http.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/http.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/js-clone.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/js-clone.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/monorepo.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/monorepo.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/my-promise.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/my-promise.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/regex.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/regex.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/yahoo-rules.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/yahoo-rules.md"
+    },
+    {
+      "originalPath": "/Users/scx/Documents/code/scx-blog/scattered-notes/yapi.md",
+      "newPath": "/Users/scx/Documents/code/scx-blog/src/content/blog/scattered-notes/yapi.md"
+    }
+  ]
+}

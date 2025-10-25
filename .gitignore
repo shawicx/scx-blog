@@ -4,3 +4,65 @@ node_modules/*
 .vitepress/cache/*
 .vitepress/dist/*
 .DS_Store
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+build/
+.output/
+
+# Environment variables
+.env*
+!.env.example
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+*.DS_Store
+.DS_Store?
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Icon?
+ipod_video_thumb[0-9].bmp
+[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].bmp
+_desktop.ini
+ntuser.dat*
+NTUSER.DAT*
+ntuser.ini*
+NTUSER.INI*
+
+# TypeScript
+*.tsbuildinfo
+*.jspm-cache
+
+# Testing
+coverage/
+.nyc_output/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Sensitive files
+config/
+secrets/
+
+# Astro-specific
+!.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
