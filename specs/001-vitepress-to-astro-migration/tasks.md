@@ -26,11 +26,11 @@ description: "Task list for VitePress to Astro Migration"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan in src/, public/, and root level files
-- [ ] T002 [P] Initialize Astro project with TypeScript 5.x dependencies in package.json
-- [ ] T003 [P] Configure linting and formatting tools (ESLint, Prettier) for Astro project
-- [ ] T004 Create initial tsconfig.json with Astro configuration
-- [ ] T005 [P] Setup basic Astro configuration in astro.config.mjs
+- [X] T001 Create project structure per implementation plan in src/, public/, and root level files
+- [X] T002 [P] Initialize Astro project with TypeScript 5.x dependencies in package.json
+- [X] T003 [P] Configure linting and formatting tools (ESLint, Prettier) for Astro project
+- [X] T004 Create initial tsconfig.json with Astro configuration
+- [X] T005 [P] Setup basic Astro configuration in astro.config.mjs
 
 ---
 
@@ -40,13 +40,13 @@ description: "Task list for VitePress to Astro Migration"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Setup Astro content collections configuration per data-model.md in src/content/config.ts
-- [ ] T007 [P] Create content collection schemas for blog and pages as defined in data-model.md
-- [ ] T008 Create base layout components structure in src/layouts/
-- [ ] T009 Setup routing structure in src/pages/ with index.astro
-- [ ] T010 Setup asset handling and static file serving in public/ directory
-- [ ] T011 Configure build process to output to dist/ directory
-- [ ] T012 Setup environment configuration for different deployment stages
+- [X] T006 Setup Astro content collections configuration per data-model.md in src/content/config.ts
+- [X] T007 [P] Create content collection schemas for blog and pages as defined in data-model.md
+- [X] T008 Create base layout components structure in src/layouts/
+- [X] T009 Setup routing structure in src/pages/ with index.astro
+- [X] T010 Setup asset handling and static file serving in public/ directory
+- [X] T011 Configure build process to output to dist/ directory
+- [X] T012 Setup environment configuration for different deployment stages
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -60,13 +60,13 @@ description: "Task list for VitePress to Astro Migration"
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Create content migration script in scripts/migrate-content.mjs
-- [ ] T014 [P] [US1] Set up source directory mapping from ./docs/ to ./src/content/blog/
-- [ ] T015 [US1] Implement frontmatter transformation logic (title→title, description→summary, date→pubDate)
-- [ ] T016 [US1] Create content validation functions to check required fields per data-model.md
-- [ ] T017 [US1] Migrate all existing VitePress markdown files to Astro content collections
-- [ ] T018 [US1] Update URL routing to preserve existing URLs for SEO purposes
-- [ ] T019 [P] [US1] Create content migration status reporting in migration-result.json
+- [X] T013 [P] [US1] Create content migration script in scripts/migrate-content.mjs
+- [X] T014 [P] [US1] Set up source directory mapping from ./docs/ to ./src/content/blog/
+- [X] T015 [US1] Implement frontmatter transformation logic (title→title, description→summary, date→pubDate)
+- [X] T016 [US1] Create content validation functions to check required fields per data-model.md
+- [X] T017 [US1] Migrate all existing VitePress markdown files to Astro content collections
+- [X] T018 [US1] Update URL routing to preserve existing URLs for SEO purposes
+- [X] T019 [P] [US1] Create content migration status reporting in migration-result.json
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
