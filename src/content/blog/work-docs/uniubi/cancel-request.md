@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '取消重复请求的实现方案'
+description: '使用AbortController和axios cancelToken防止重复请求，提升应用性能'
 draft: false
+published: 2025-08-09
 ---
 
 # 取消重复请求

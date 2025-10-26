@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'Monorepo项目问题记录'
+description: 'Monorepo项目中遇到的TypeScript路径解析等技术问题及解决方案'
 draft: false
+published: 2025-08-09
 ---
 
 <!--
@@ -9,7 +10,7 @@ draft: false
  * @Date: 2024-06-23 01:01:02
  * @LastEditors: shawicx d35f3153@proton.me
  * @LastEditTime: 2025-08-09 09:49:33
- * @Description: 
+ * @Description:
 -->
 # monorepo 的一些问题
 ## tsconfig paths 解析失败

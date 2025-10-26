@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '视频监控系统技术方案'
+description: '视频监控平台的延迟优化、小程序集成和多播放器组件实现'
 draft: false
+published: 2025-08-09
 ---
 
 # 视频监控

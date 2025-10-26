@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'BI地图组件开发'
+description: 'BI系统中地图组件的状态码映射、数据处理和可视化实现方案'
 draft: false
+published: 2025-08-09
 ---
 
 # BiMap 双向映射工具类

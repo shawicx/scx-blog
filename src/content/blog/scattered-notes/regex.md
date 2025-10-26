@@ -1,16 +1,10 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '常用正则表达式大全'
+description: '收录常用的正则表达式模式，包括密码校验、手机号、身份证号、邮箱等验证规则'
 draft: false
+published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 00:57:25
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:45:56
- * @Description: 
--->
 # 正则
 
 ```typescript

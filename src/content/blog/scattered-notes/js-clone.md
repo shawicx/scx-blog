@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'JavaScript深浅拷贝详解'
+description: '深入理解JavaScript中的深浅拷贝概念，包含多种实现方法和实际应用场景'
 draft: false
+published: 2025-08-09
 ---
 
 <!--
@@ -9,7 +10,7 @@ draft: false
  * @Date: 2024-06-23 00:57:25
  * @LastEditors: shawicx d35f3153@proton.me
  * @LastEditTime: 2025-08-09 09:45:45
- * @Description: 
+ * @Description:
 -->
 # 深浅拷贝
 

@@ -1,16 +1,10 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'HTTP协议详解'
+description: '深入了解HTTP协议的特点、工作过程、状态码、请求方法以及HTTP/2多路复用技术'
 draft: false
+published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 00:59:14
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:45:23
- * @Description: 
--->
 # HTTP
 
 ## URI和URL

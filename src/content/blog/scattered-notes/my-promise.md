@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'Promise与HTTPS技术详解'
+description: 'JavaScript Promise状态机机制和HTTPS安全通信协议的核心概念解析'
 draft: false
+published: 2025-08-09
 ---
 
 <!--
@@ -9,7 +10,7 @@ draft: false
  * @Date: 2025-04-03 13:58:46
  * @LastEditors: shawicx d35f3153@proton.me
  * @LastEditTime: 2025-08-09 09:45:52
- * @Description: 
+ * @Description:
 -->
 # Promise
 
