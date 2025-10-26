@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '小程序蓝牙开发指南'
+description: '微信小程序蓝牙通信协议实现，包含中回回弹仪设备连接和数据交互'
 draft: false
+published: 2025-08-09
 ---
 
 # 小程序蓝牙

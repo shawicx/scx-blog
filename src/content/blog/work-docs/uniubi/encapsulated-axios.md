@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'Axios封装与请求管理'
+description: 'TypeScript实现的Axios封装方案，包含错误处理、请求去重和状态管理'
 draft: false
+published: 2025-08-09
 ---
 
 # 封装 axios 方法

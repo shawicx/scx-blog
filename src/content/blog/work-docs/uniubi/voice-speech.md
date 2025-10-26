@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '语音播报技术实现方案'
+description: '从原生API到自定义polyfill，解决跨平台语音播报兼容性问题'
 draft: false
+published: 2025-08-09
 ---
 
 # 语音播报

@@ -1,16 +1,10 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '雅虎军规 - 前端性能优化指南'
+description: '雅虎前端性能优化14条军规，包括减少HTTP请求、使用CDN、启用压缩等经典优化策略'
 draft: false
+published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 00:57:25
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:46:01
- * @Description: 
--->
 # 雅虎军规
 
 ### 1. 尽可能减少HTTP请求

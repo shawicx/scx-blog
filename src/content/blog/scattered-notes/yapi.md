@@ -1,16 +1,10 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'YApi接口管理工具使用'
+description: 'YApi接口分类获取和项目迁移的TypeScript实现代码'
 draft: false
+published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 12:13:31
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:46:08
- * @Description: 
--->
 ```typescript
 import axios from 'axios';
 

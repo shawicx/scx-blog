@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'TPLink路由器配置指南'
+description: 'TPLink路由器认证规则配置、Wi-Fi认证问题解决方案以及各平台认证地址汇总'
 draft: false
+published: 2025-08-09
 ---
 
 # TPLink 路由器

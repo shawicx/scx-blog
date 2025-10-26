@@ -1,16 +1,10 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: '防抖与节流详解'
+description: 'JavaScript中防抖和节流的实现原理、代码示例以及实际应用场景'
 draft: false
+published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 11:53:22
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:44:55
- * @Description: 
--->
 # 节流与防抖
 
 ## 节流: 规定时间段内只执行一次事件

@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'Vue3 组合式API实践指南'
+description: 'Vue3组合式API的使用方法、依赖注入和组件开发最佳实践'
 draft: false
+published: 2025-08-09
 ---
 
 # Vue 3 常用 API 实战指南

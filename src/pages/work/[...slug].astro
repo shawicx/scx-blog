@@ -1,0 +1,78 @@
+---
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+
+  // 过滤工作记录相关的文章
+  const workPosts = posts.filter(post =>
+    post.id.includes('work-docs/') &&
+    (!post.data.draft || import.meta.env.DEV)
+  )
+
+  // 按公司分组
+  const uniubiPosts = workPosts.filter(post => post.id.includes('uniubi/'))
+  const viewshinePosts = workPosts.filter(post => post.id.includes('viewshine/'))
+
+  return [
+    {
+      params: { slug: undefined },
+      props: {
+        category: 'all',
+        posts: workPosts,
+        title: '工作记录',
+        description: '项目开发过程中的技术文档、解决方案和经验总结'
+      },
+    },
+    {
+      params: { slug: 'uniubi/' },
+      props: {
+        category: 'uniubi',
+        posts: uniubiPosts,
+        title: '宇泛科技',
+        description: '在宇泛科技工作期间的技术记录和项目经验'
+      },
+    },
+    {
+      params: { slug: 'viewshine/' },
+      props: {
+        category: 'viewshine',
+        posts: viewshinePosts,
+        title: '威星科技',
+        description: '在威星科技工作期间的技术记录和项目经验'
+      },
+    },
+  ]
+}
+
+const { posts, title, description } = Astro.props
+
+// 按年份分组
+const postsByYear = new Map()
+posts.forEach(post => {
+  const year = new Date(post.data.published).getFullYear()
+  if (!postsByYear.has(year)) {
+    postsByYear.set(year, [])
+  }
+  postsByYear.get(year).push(post)
+})
+
+// 按年份排序（最新的在前）
+const sortedYears = Array.from(postsByYear.keys()).sort((a, b) => b - a)
+---
+
+<Layout>
+  <div class="mb-8">
+    <h1 class="text-6 font-bold mb-4 c-primary">{title}</h1>
+    <p class="text-4 c-secondary">{description}</p>
+  </div>
+
+  {sortedYears.map(year => (
+    <section class="mb-7.5">
+      <div class="uno-decorative-line" />
+      <PostList posts={postsByYear.get(year)} lang="zh" />
+    </section>
+  ))}
+</Layout>

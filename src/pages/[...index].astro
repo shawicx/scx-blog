@@ -1,0 +1,30 @@
+---
+import PostList from '@/components/PostList.astro'
+import { defaultLocale, moreLocales } from '@/config'
+import Layout from '@/layouts/Layout.astro'
+import { getPinnedPosts, getPostsByYear } from '@/utils/content'
+
+export async function getStaticPaths() {
+  // 简化为只支持默认中文路由
+  return [
+    {
+      params: { index: undefined },
+      props: { lang: 'zh' },
+    }
+  ]
+}
+
+const { lang } = Astro.props
+
+const pinnedPosts = await getPinnedPosts(lang)
+const postsByYear = await getPostsByYear(lang)
+console.log(postsByYear, 'post')
+---
+
+<Layout>
+  <!-- 首页内容待填充 -->
+  <div class="min-h-screen">
+    <h1 class="text-6 font-bold mb-8 c-primary">欢迎来到我的博客</h1>
+    <p class="text-4 c-secondary">这里是首页内容区域，您可以后续在这里添加任何内容。</p>
+  </div>
+</Layout>

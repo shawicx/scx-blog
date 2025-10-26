@@ -1,7 +1,8 @@
 ---
-title: 'Default Title'
-description: 'Default Description'
+title: 'scx-blog 项目章程'
+description: 'scx-blog从VitePress迁移到Astro的核心原则、开发流程和质量保证规范'
 draft: false
+published: 2025-04-01
 ---
 
 # scx-blog Constitution
