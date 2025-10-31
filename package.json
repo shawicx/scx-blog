@@ -62,7 +62,8 @@
     "tsx": "^4.20.5",
     "typescript": "~5.9.2",
     "unocss": "66.5.1",
-    "unocss-preset-theme": "^0.14.1"
+    "unocss-preset-theme": "^0.14.1",
+    "vite-svg-loader": "^5.1.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
