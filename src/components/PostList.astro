@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import PinIcon from '@/assets/icons/pin-icon.svg'
 import PostDate from '@/components/PostDate.astro'
+import PinIconSrc from '@/assets/icons/pin-icon.svg'
 import { getPostPath } from '@/i18n/path'
 import { getPostDescription } from '@/utils/description'
 import { isHomePage } from '@/utils/page'
@@ -44,7 +44,7 @@ export interface Props {
           </a>
           {/* pinned icon */}
           {pinned && (
-            <PinIcon
+            <PinIconSrc
               aria-hidden="true"
               class="ml-0.25em inline-block aspect-square w-0.98em translate-y--0.1em lg:(w-1.05em translate-y--0.15em)"
               fill="currentColor"

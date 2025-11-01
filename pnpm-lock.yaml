@@ -147,6 +147,9 @@ importers:
       unocss-preset-theme:
         specifier: ^0.14.1
         version: 0.14.1(@unocss/core@66.5.1)
+      vite-svg-loader:
+        specifier: ^5.1.0
+        version: 5.1.0(vue@3.5.17(typescript@5.9.2))
 
 packages:
 
@@ -4203,6 +4206,11 @@ packages:
 
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
+
+  vite-svg-loader@5.1.0:
+    resolution: {integrity: sha512-M/wqwtOEjgb956/+m5ZrYT/Iq6Hax0OakWbokj8+9PXOnB7b/4AxESHieEtnNEy7ZpjsjYW1/5nK8fATQMmRxw==}
+    peerDependencies:
+      vue: '>=3.2.13'
 
   vite@6.3.6:
     resolution: {integrity: sha512-0msEVHJEScQbhkbVTb/4iHZdJ6SXp/AvxL2sjwYQFfBqleHtnCqv1J3sa9zbWz/6kW1m9Tfzn92vW+kZ1WV6QA==}
@@ -9418,6 +9426,11 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
+
+  vite-svg-loader@5.1.0(vue@3.5.17(typescript@5.9.2)):
+    dependencies:
+      svgo: 3.3.2
+      vue: 3.5.17(typescript@5.9.2)
 
   vite@6.3.6(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.29.3)(terser@5.39.0)(tsx@4.20.5)(yaml@2.8.1):
     dependencies:

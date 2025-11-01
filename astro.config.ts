@@ -101,6 +101,7 @@ export default defineConfig({
         },
       },
     ],
+    assetsInclude: ['**/*.svg'],
   },
   devToolbar: {
     enabled: false,
