@@ -5,7 +5,8 @@ node_modules/*
 .vitepress/dist/*
 .DS_Store
 # Dependencies
-node_modules/
+node_modules/*
+.astro/*
 
 # Production builds
 dist/

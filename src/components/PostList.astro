@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import PinIcon from '@/assets/icons/pin-icon.svg'
 import PostDate from '@/components/PostDate.astro'
-import PinIconSrc from '@/assets/icons/pin-icon.svg'
 import { getPostPath } from '@/i18n/path'
 import { getPostDescription } from '@/utils/description'
 import { isHomePage } from '@/utils/page'
@@ -44,7 +44,7 @@ export interface Props {
           </a>
           {/* pinned icon */}
           {pinned && (
-            <PinIconSrc
+            <PinIcon
               aria-hidden="true"
               class="ml-0.25em inline-block aspect-square w-0.98em translate-y--0.1em lg:(w-1.05em translate-y--0.15em)"
               fill="currentColor"
@@ -60,7 +60,7 @@ export interface Props {
         >
           <PostDate
             date={post.data.published}
-            minutes={post.remarkPluginFrontmatter?.minutes || 1}
+            minutes={post.remarkPluginFrontmatter.minutes}
           />
         </div>
 
@@ -68,7 +68,7 @@ export interface Props {
         <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
           <PostDate
             date={post.data.published}
-            minutes={post.remarkPluginFrontmatter?.minutes || 1}
+            minutes={post.remarkPluginFrontmatter.minutes}
           />
         </div>
 

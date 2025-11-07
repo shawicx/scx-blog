@@ -5,13 +5,6 @@ draft: false
 published: 2025-08-09
 ---
 
-<!--
- * @Author: shawicx d35f3153@proton.me
- * @Date: 2024-06-23 00:57:25
- * @LastEditors: shawicx d35f3153@proton.me
- * @LastEditTime: 2025-08-09 09:45:45
- * @Description:
--->
 # 深浅拷贝
 
 ## 一、问题由来
