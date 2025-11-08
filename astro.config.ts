@@ -107,8 +107,19 @@ export default defineConfig({
           return code.replace(/url\("\/fonts\//g, `url("${base}/fonts/`)
         },
       },
-      viteSvgLoader(),
+      viteSvgLoader({
+        svgo: false, // 保留原始 SVG
+      }),
     ],
+    assetsInclude: [
+      '**/*.png',
+      '**/*.jpg',
+      '**/*.jpeg',
+      '**/*.gif',
+      '**/*.webp',
+      '**/*.avif',
+      '**/*.ico',
+    ]
     // Let `vite-svg-loader` handle SVG imports as components.
     // Removing svg from assetsInclude avoids double-handling and ensures SVGs are processed by the loader.
   },
