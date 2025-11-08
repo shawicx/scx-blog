@@ -109,7 +109,8 @@ export default defineConfig({
       },
       viteSvgLoader(),
     ],
-    assetsInclude: ['**/*.svg'],
+    // Let `vite-svg-loader` handle SVG imports as components.
+    // Removing svg from assetsInclude avoids double-handling and ensures SVGs are processed by the loader.
   },
   devToolbar: {
     enabled: false,
