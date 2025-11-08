@@ -1,0 +1,20 @@
+---
+export interface Props {
+  class?: string;
+  fill?: string;
+  'aria-hidden'?: boolean | "false" | "true" | null | undefined;
+}
+
+const { class: className, fill = 'currentColor', 'aria-hidden': ariaHidden, ...props } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill={fill}
+  class={className}
+  aria-hidden={ariaHidden}
+  {...props}
+>
+  <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2l.8 8h1l.8-8H19v-2l-2-2z"/>
+</svg>
