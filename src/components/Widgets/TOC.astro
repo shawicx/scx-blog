@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import TocIcon from '@/components/icons/TocIcon.astro'
+import TocIcon from '@/components/SvgIcons/TocIcon.astro'
 import { ui } from '@/i18n/ui'
 import { getPageInfo } from '@/utils/page'
 
@@ -280,4 +280,3 @@ document.addEventListener('astro:after-swap', setupTOCHighlight)
 document.addEventListener('astro:before-swap', cleanupTOCObservers)
 setupTOCHighlight()
 </script>
-
