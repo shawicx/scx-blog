@@ -29,11 +29,11 @@ hls 播放地址的 ts 切片时长是1s，网速比较慢的情况下缓冲会�
 
 ## 2 小程序
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920612466-836ce386-90a9-45bd-a29a-7ccf5225f46f.png#averageHue=%23faf9f9\&clientId=u4a56f34d-1aa8-4\&from=paste\&height=358\&id=u34e1b5bd\&originHeight=422\&originWidth=722\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=55057\&status=done\&style=none\&taskId=uce3fcd01-694c-4a5a-9149-99199282115\&title=\&width=613 "image.png")
+<!--![video-platform-architecture](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920612466-836ce386-90a9-45bd-a29a-7ccf5225f46f.png)
 
-![企业微信截图\_317cc2b2-76a1-4bbf-bd93-06429b948fbc.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920704553-e5690ab5-40c0-480a-9c5a-647633c22ff6.png#averageHue=%23fcfbfb\&clientId=u4a56f34d-1aa8-4\&from=paste\&height=280\&id=u7cece303\&originHeight=552\&originWidth=603\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=60655\&status=done\&style=none\&taskId=u173c7e0f-b095-4cdb-8d31-e93d861b33f\&title=\&width=306 "企业微信截图_317cc2b2-76a1-4bbf-bd93-06429b948fbc.png")
+![screenshot-portal](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920704553-e5690ab5-40c0-480a-9c5a-647633c22ff6.png)-->
 
-![企业微信截图\_665a1898-18f4-4b18-b178-5e7e946b45c6.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920717161-70059e4b-cf3a-4f7d-bd68-6128533d1572.png#averageHue=%23fbf9f9\&clientId=u4a56f34d-1aa8-4\&from=paste\&height=278\&id=u4f1b5ca6\&originHeight=402\&originWidth=604\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=49113\&status=done\&style=none\&taskId=ua069a4c3-aad0-4580-993c-e2978918180\&title=\&width=418 "企业微信截图_665a1898-18f4-4b18-b178-5e7e946b45c6.png")
+<!--![image](https://cdn.nlark.com/yuque/0/2022/png/22890312/1663920717161-70059e4b-cf3a-4b7d-bd68-6128533d1572.png)-->
 
 1. 必须https
 2. 目前是由运维放置校验文件，因为 校验文件 放在 public 下面会被打包进 dist/js 中
@@ -52,9 +52,9 @@ hls 播放地址的 ts 切片时长是1s，网速比较慢的情况下缓冲会�
 
 ### 3.1 引用关系
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640230444-7257d0ec-ae50-41c1-a97b-5971a3bbebb6.png#averageHue=%23262b32\&clientId=uc2971265-8f6f-4\&from=paste\&height=405\&id=u411717d9\&originHeight=405\&originWidth=338\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=35992\&status=done\&style=none\&taskId=u9df10ad1-3833-4a43-bbe2-c797a2303b9\&title=\&width=338 "image.png")
+<!--![player-dependencies](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640230444-7257d0ec-ae50-41c1-a97b-597a3bbebb6.png)
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/22890312/1646641132081-cdbec8f9-6341-46eb-b974-df147182c6d6.jpeg)
+![](https://cdn.nlark.com/yuque/0/2022/jpeg/22890312/1646641132081-cdbec8f9-6341-46eb-b974-df147182c6d6.jpeg)-->
 
 ### 3.2 VideoPlayer - 萤石云播放
 
@@ -66,9 +66,9 @@ hls 播放地址的 ts 切片时长是1s，网速比较慢的情况下缓冲会�
 
 萤石云播放器(直播模式)暂停后播放器显示为黑色背景，这里使用 `ezuikit-js`的截图 API `capturePicture`截取最后一帧的图片 覆盖于播放器上方。
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640850898-68d51382-dce2-405c-a462-be7ff07557f3.png#averageHue=%23292e36\&clientId=uc2971265-8f6f-4\&from=paste\&height=154\&id=ue6094e4e\&originHeight=154\&originWidth=905\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=46456\&status=done\&style=none\&taskId=u2c704f21-d973-4bb1-9c8c-3ca3fadb3fb\&title=\&width=905 "image.png")
+<!--![pause-screenshot](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640850898-68d51382-dce2-405c-a462-be7ff07557f3.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640880703-83f32b91-4471-472f-ba36-1d17b39988f4.png#averageHue=%23292d36\&clientId=uc2971265-8f6f-4\&from=paste\&height=821\&id=WywmD\&originHeight=821\&originWidth=836\&originalType=binary\&ratio=1\&rotation=0\&showTitle=false\&size=135158\&status=done\&style=none\&taskId=u3c8afea5-d35a-4349-a1c6-0b4b882bb03\&title=\&width=836 "image.png")
+![player-overlay](https://cdn.nlark.com/yuque/0/2022/png/22890312/1646640880703-83f32b91-4471-472f-ba36-1d17b39988f4.png)-->
 
 ### 3.3 WebRtcPlayer - 七牛云 webrtc
 

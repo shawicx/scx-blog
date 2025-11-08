@@ -1,3 +1,4 @@
+import path from 'node:path'
 import mdx from '@astrojs/mdx'
 import partytown from '@astrojs/partytown'
 import sitemap from '@astrojs/sitemap'
@@ -9,6 +10,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkDirective from 'remark-directive'
 import remarkMath from 'remark-math'
 import UnoCSS from 'unocss/astro'
+import viteSvgLoader from 'vite-svg-loader'
 import { base, themeConfig } from './src/config'
 import { rehypeCodeCopyButton } from './src/plugins/rehype-code-copy-button.mjs'
 import { rehypeExternalLinks } from './src/plugins/rehype-external-links.mjs'
@@ -89,6 +91,11 @@ export default defineConfig({
     },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
+    },
     plugins: [
       {
         name: 'prefix-font-urls-with-base',
@@ -100,6 +107,7 @@ export default defineConfig({
           return code.replace(/url\("\/fonts\//g, `url("${base}/fonts/`)
         },
       },
+      viteSvgLoader(),
     ],
     assetsInclude: ['**/*.svg'],
   },
