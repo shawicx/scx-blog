@@ -2,7 +2,7 @@
 import PostList from '@/components/PostList.astro'
 import { defaultLocale, moreLocales } from '@/config'
 import Layout from '@/layouts/Layout.astro'
-import { getPinnedPosts, getPostsByYear } from '@/utils/content'
+import { getPinnedPosts, getPostsByGroups } from '@/utils/content'
 
 export async function getStaticPaths() {
   type PathItem = {
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 const { lang } = Astro.props
 
 const pinnedPosts = await getPinnedPosts(lang)
-const postsByYear = await getPostsByYear(lang)
+const postsByGroups = await getPostsByGroups(lang)
 ---
 
 <Layout>
@@ -44,11 +44,11 @@ const postsByYear = await getPostsByYear(lang)
     </section>
   )}
 
-  <!-- Regular Posts -->
-  {[...postsByYear.entries()].map(([_year, posts]) => (
+  <!-- Grouped Posts -->
+  {postsByGroups.size > 0 && (
     <section class="mb-7.5">
       <div class="uno-decorative-line" />
-      <PostList posts={posts} lang={lang} />
+      <PostList groups={postsByGroups} lang={lang} />
     </section>
-  ))}
+  )}
 </Layout>

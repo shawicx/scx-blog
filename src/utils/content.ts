@@ -236,3 +236,134 @@ async function _getTagSupportedLangs(tag: string) {
 }
 
 export const getTagSupportedLangs = memoize(_getTagSupportedLangs)
+
+/**
+ * Group interface for folder-based organization
+ */
+export interface PostGroup {
+  id: string
+  title: string
+  description: string
+  posts: Post[]
+  level: number
+}
+
+/**
+ * Get folder group information from index.md files
+ */
+async function _getGroupInfo(groupId: string, lang?: string): Promise<PostGroup | null> {
+  try {
+    const indexPosts = await getCollection('posts', ({ id, data }) => {
+      // Check if this is an index.md file in the target folder
+      // Handle both 'folder-name' and 'folder-name/index' patterns
+      const isIndexFile = id === groupId || id === `${groupId}/index` || id === `${groupId}/index.md`
+      const hasCorrectLang = data.lang === lang || data.lang === ''
+      const shouldInclude = import.meta.env.DEV || !data.draft
+      
+      return isIndexFile && hasCorrectLang && shouldInclude
+    })
+
+    if (indexPosts.length === 0) return null
+
+    const indexPost = indexPosts[0]
+    const level = groupId.split('/').length
+    
+    return {
+      id: groupId,
+      title: indexPost.data.title,
+      description: indexPost.data.description || '',
+      posts: [],
+      level
+    }
+  } catch (error) {
+    console.error('Error getting group info for', groupId, error)
+    return null
+  }
+}
+
+/**
+ * Get posts organized by folder groups (max 3 levels)
+ */
+async function _getPostsByGroups(lang?: string): Promise<Map<string, PostGroup>> {
+  const posts = await getRegularPosts(lang)
+  const groupMap = new Map<string, PostGroup>()
+
+  // First, identify all group index files to exclude them from regular posts
+  const groupIndexIds = new Set<string>()
+  
+  // Collect all folder paths (max 3 levels) and identify group indexes
+  const folderPaths = new Set<string>()
+  
+  posts.forEach(post => {
+    const pathParts = post.id.split('/')
+    
+    // Skip direct files in posts root
+    if (pathParts.length <= 1) {
+      return
+    }
+    
+    // Generate folder paths for up to 3 levels
+    for (let i = 1; i <= Math.min(3, pathParts.length - 1); i++) {
+      const folderPath = pathParts.slice(0, i).join('/')
+      folderPaths.add(folderPath)
+    }
+  })
+
+  // Identify which posts are group index files
+  posts.forEach(post => {
+    // Check if this post is an index file for any folder
+    if (folderPaths.has(post.id) || post.id.endsWith('/index')) {
+      groupIndexIds.add(post.id)
+    }
+  })
+
+
+  // Create groups for each folder
+  for (const folderPath of folderPaths) {
+    const groupInfo = await _getGroupInfo(folderPath, lang)
+    if (groupInfo) {
+      groupMap.set(folderPath, groupInfo)
+    }
+  }
+
+  // Assign posts to their respective groups (excluding group index files)
+  posts.forEach(post => {
+    const pathParts = post.id.split('/')
+    
+    // Skip group index files - they are descriptions, not content
+    if (groupIndexIds.has(post.id)) {
+      return
+    }
+    
+    // Skip direct files in posts root
+    if (pathParts.length <= 1) {
+      return
+    }
+    
+    // Find the most specific group this post belongs to (deepest folder)
+    let targetGroup: string | null = null
+    
+    // Check from deepest to shallowest level to find the most specific group
+    for (let i = Math.min(3, pathParts.length - 1); i >= 1; i--) {
+      const folderPath = pathParts.slice(0, i).join('/')
+      if (groupMap.has(folderPath)) {
+        targetGroup = folderPath
+        break
+      }
+    }
+    
+    
+    if (targetGroup && groupMap.has(targetGroup)) {
+      groupMap.get(targetGroup)!.posts.push(post)
+    }
+  })
+
+  // Sort posts within each group by date
+  groupMap.forEach(group => {
+    group.posts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+  })
+
+  return groupMap
+}
+
+export const getPostsByGroups = memoize(_getPostsByGroups)

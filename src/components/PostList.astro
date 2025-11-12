@@ -5,6 +5,7 @@ import PostDate from '@/components/PostDate.astro'
 import { getPostPath } from '@/i18n/path'
 import { getPostDescription } from '@/utils/description'
 import { isHomePage } from '@/utils/page'
+import type { PostGroup } from '@/utils/content'
 
 type Post = CollectionEntry<'posts'> & {
   remarkPluginFrontmatter: {
@@ -12,76 +13,168 @@ type Post = CollectionEntry<'posts'> & {
   }
 }
 
-const { posts, lang, pinned = false } = Astro.props
+const { posts, groups, lang, pinned = false } = Astro.props
 const isHome = isHomePage(Astro.url.pathname)
 
 export interface Props {
-  posts: Post[]
+  posts?: Post[]
+  groups?: Map<string, PostGroup>
   lang: string
   pinned?: boolean
 }
 ---
 
-<ul>
-  {posts.map((post) => {
-    const slug = post.data.abbrlink || post.id
+{groups ? (
+  /* Hierarchical grouped posts rendering */
+  <div>
+    {(() => {
+      // Convert groups Map to hierarchical structure
+      const groupsArray = Array.from(groups.entries()).map(([id, group]) => ({ id, ...group }))
+      const rootGroups = groupsArray.filter(g => g.level === 1)
+      
+      const renderGroup = (group: any, level = 0) => (
+        <div class="mb-8" key={group.id}>
+          {/* Group header */}
+          <div class="mb-4">
+            <h2 class={`text-xl font-semibold mb-2 c-primary ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.title}</h2>
+            {group.description && (
+              <p class={`text-sm c-secondary ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.description}</p>
+            )}
+          </div>
+          
+          {/* Child groups */}
+          {groupsArray
+            .filter(child => child.id.startsWith(group.id + '/') && child.level === group.level + 1)
+            .map(childGroup => renderGroup(childGroup, level + 1))
+          }
+          
+          {/* Group posts */}
+          {group.posts.length > 0 && (
+            <ul class={`ml-${(level + 1) * 4}`}>
+              {group.posts.map((post) => {
+                const slug = post.data.abbrlink || post.id
+                return (
+                  <li class="mb-5.5" lg={isHome ? 'mb-10' : ''}>
+                    {/* post title */}
+                    <h3 class="inline transition-colors hover:c-primary">
+                      <a
+                        class="cjk:tracking-0.02em"
+                        lg={isHome ? 'font-medium text-4.5' : ''}
+                        href={getPostPath(slug, lang)}
+                        transition:name={`post-${slug}${lang ? `-${lang}` : ''}`}
+                        data-disable-theme-transition
+                      >
+                        {post.data.title}
+                      </a>
+                      {pinned && (
+                        <PinIcon
+                          aria-hidden="true"
+                          class="ml-0.25em inline-block aspect-square w-0.98em translate-y--0.1em lg:(w-1.05em translate-y--0.15em)"
+                          fill="currentColor"
+                        />
+                      )}
+                    </h3>
 
-    return (
-      <li
-        class="mb-5.5"
-        lg={isHome ? 'mb-10' : ''}
-      >
-        {/* post title */}
-        <h3 class="inline transition-colors hover:c-primary">
-          <a
-            class="cjk:tracking-0.02em"
-            lg={isHome ? 'font-medium text-4.5' : ''}
-            href={getPostPath(slug, lang)}
-            transition:name={`post-${slug}${lang ? `-${lang}` : ''}`}
+                    {/* mobile post time */}
+                    <div
+                      class="py-0.8 text-3.5 font-time lg:hidden"
+                      transition:name={`time-${slug}${lang ? `-${lang}` : ''}`}
+                      data-disable-theme-transition
+                    >
+                      <PostDate
+                        date={post.data.published}
+                        minutes={post.remarkPluginFrontmatter.minutes}
+                      />
+                    </div>
+
+                    {/* desktop post time */}
+                    <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
+                      <PostDate
+                        date={post.data.published}
+                        minutes={post.remarkPluginFrontmatter.minutes}
+                      />
+                    </div>
+
+                    {/* desktop post description */}
+                    {isHome && (
+                      <div class="heti hidden" lg="mt-2.25 block">
+                        <p>{getPostDescription(post, 'list')}</p>
+                      </div>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </div>
+      )
+      
+      return rootGroups.map(group => renderGroup(group))
+    })()}
+  </div>
+) : (
+  /* Regular posts rendering (fallback for pinned posts, etc.) */
+  <ul>
+    {posts?.map((post) => {
+      const slug = post.data.abbrlink || post.id
+
+      return (
+        <li
+          class="mb-5.5"
+          lg={isHome ? 'mb-10' : ''}
+        >
+          {/* post title */}
+          <h3 class="inline transition-colors hover:c-primary">
+            <a
+              class="cjk:tracking-0.02em"
+              lg={isHome ? 'font-medium text-4.5' : ''}
+              href={getPostPath(slug, lang)}
+              transition:name={`post-${slug}${lang ? `-${lang}` : ''}`}
+              data-disable-theme-transition
+            >
+              {post.data.title}
+            </a>
+            {/* pinned icon */}
+            {pinned && (
+              <PinIcon
+                aria-hidden="true"
+                class="ml-0.25em inline-block aspect-square w-0.98em translate-y--0.1em lg:(w-1.05em translate-y--0.15em)"
+                fill="currentColor"
+              />
+            )}
+          </h3>
+
+          {/* mobile post time */}
+          <div
+            class="py-0.8 text-3.5 font-time lg:hidden"
+            transition:name={`time-${slug}${lang ? `-${lang}` : ''}`}
             data-disable-theme-transition
           >
-            {post.data.title}
-          </a>
-          {/* pinned icon */}
-          {pinned && (
-            <PinIcon
-              aria-hidden="true"
-              class="ml-0.25em inline-block aspect-square w-0.98em translate-y--0.1em lg:(w-1.05em translate-y--0.15em)"
-              fill="currentColor"
+            <PostDate
+              date={post.data.published}
+              minutes={post.remarkPluginFrontmatter.minutes}
             />
-          )}
-        </h3>
-
-        {/* mobile post time */}
-        <div
-          class="py-0.8 text-3.5 font-time lg:hidden"
-          transition:name={`time-${slug}${lang ? `-${lang}` : ''}`}
-          data-disable-theme-transition
-        >
-          <PostDate
-            date={post.data.published}
-            minutes={post.remarkPluginFrontmatter.minutes}
-          />
-        </div>
-
-        {/* desktop post time */}
-        <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
-          <PostDate
-            date={post.data.published}
-            minutes={post.remarkPluginFrontmatter.minutes}
-          />
-        </div>
-
-        {/* desktop post description */}
-        {isHome && (
-          <div
-            class="heti hidden"
-            lg="mt-2.25 block"
-          >
-            <p>{getPostDescription(post, 'list')}</p>
           </div>
-        )}
-      </li>
-    )
-  })}
-</ul>
+
+          {/* desktop post time */}
+          <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
+            <PostDate
+              date={post.data.published}
+              minutes={post.remarkPluginFrontmatter.minutes}
+            />
+          </div>
+
+          {/* desktop post description */}
+          {isHome && (
+            <div
+              class="heti hidden"
+              lg="mt-2.25 block"
+            >
+              <p>{getPostDescription(post, 'list')}</p>
+            </div>
+          )}
+        </li>
+      )
+    })}
+  </ul>
+)}
