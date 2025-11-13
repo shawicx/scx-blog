@@ -1,11 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import PinIcon from '@/components/SvgIcons/PinIcon.astro'
+import type { PostGroup } from '@/utils/content'
 import PostDate from '@/components/PostDate.astro'
+import PinIcon from '@/components/SvgIcons/PinIcon.astro'
 import { getPostPath } from '@/i18n/path'
 import { getPostDescription } from '@/utils/description'
 import { isHomePage } from '@/utils/page'
-import type { PostGroup } from '@/utils/content'
 
 type Post = CollectionEntry<'posts'> & {
   remarkPluginFrontmatter: {
@@ -24,34 +24,34 @@ export interface Props {
 }
 ---
 
-{groups ? (
-  /* Hierarchical grouped posts rendering */
-  <div>
+{
+  groups
+    ? (
+      <div>
     {(() => {
       // Convert groups Map to hierarchical structure
-      const groupsArray = Array.from(groups.entries()).map(([id, group]) => ({ id, ...group }))
+      const groupsArray = Array.from(groups.entries()).map(([id, group]) => ({ ...group, id }))
       const rootGroups = groupsArray.filter(g => g.level === 1)
-      
+
       const renderGroup = (group: any, level = 0) => (
-        <div class="mb-8" key={group.id}>
+        <div class="mb-8">
           {/* Group header */}
           <div class="mb-4">
-            <h2 class={`text-xl font-semibold mb-2 c-primary ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.title}</h2>
+            <h2 class={`mb-2 text-xl c-primary font-semibold ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.title}</h2>
             {group.description && (
               <p class={`text-sm c-secondary ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.description}</p>
             )}
           </div>
-          
+
           {/* Child groups */}
           {groupsArray
-            .filter(child => child.id.startsWith(group.id + '/') && child.level === group.level + 1)
-            .map(childGroup => renderGroup(childGroup, level + 1))
-          }
-          
+            .filter(child => child.id.startsWith(`${group.id}/`) && child.level === group.level + 1)
+            .map(childGroup => renderGroup(childGroup, level + 1))}
+
           {/* Group posts */}
           {group.posts.length > 0 && (
             <ul class={`ml-${(level + 1) * 4}`}>
-              {group.posts.map((post) => {
+              {group.posts.map((post: any) => {
                 const slug = post.data.abbrlink || post.id
                 return (
                   <li class="mb-5.5" lg={isHome ? 'mb-10' : ''}>
@@ -108,13 +108,14 @@ export interface Props {
           )}
         </div>
       )
-      
+
       return rootGroups.map(group => renderGroup(group))
     })()}
   </div>
-) : (
+    )
+    : (
   /* Regular posts rendering (fallback for pinned posts, etc.) */
-  <ul>
+      <ul>
     {posts?.map((post) => {
       const slug = post.data.abbrlink || post.id
 
@@ -177,4 +178,5 @@ export interface Props {
       )
     })}
   </ul>
-)}
+)
+}
