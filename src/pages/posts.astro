@@ -1,0 +1,24 @@
+---
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getPostsByGroups } from '@/utils/content'
+
+// 获取文章分组数据
+const groups = await getPostsByGroups()
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Posts Page Header -->
+  <section class="mb-12">
+    <h1 class="mb-4 text-4xl c-primary font-bold">文章列表</h1>
+    <p class="text-lg c-secondary leading-relaxed">
+      按分类浏览所有文章，包含工作文档记录和零散笔记。
+    </p>
+  </section>
+
+  <!-- Posts List -->
+  <section class="mb-12">
+    <PostList groups={groups} lang={lang} />
+  </section>
+</Layout>

@@ -34,12 +34,12 @@ export interface Props {
       const rootGroups = groupsArray.filter(g => g.level === 1)
 
       const renderGroup = (group: any, level = 0) => (
-        <div class="mb-8">
+        <div class="mb-8" style={level > 0 ? `margin-left: ${level * 1.5}rem` : ''}>
           {/* Group header */}
           <div class="mb-4">
-            <h2 class={`mb-2 text-xl c-primary font-semibold ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.title}</h2>
+            <h2 class="mb-2 text-xl c-primary font-semibold">{group.title}</h2>
             {group.description && (
-              <p class={`text-sm c-secondary ${level > 0 ? `ml-${level * 4}` : ''}`}>{group.description}</p>
+              <p class="text-sm c-secondary">{group.description}</p>
             )}
           </div>
 
@@ -50,7 +50,7 @@ export interface Props {
 
           {/* Group posts */}
           {group.posts.length > 0 && (
-            <ul class={`ml-${(level + 1) * 4}`}>
+            <ul style={`margin-left: ${(level + 1) * 1.5}rem`}>
               {group.posts.map((post: any) => {
                 const slug = post.data.abbrlink || post.id
                 return (
