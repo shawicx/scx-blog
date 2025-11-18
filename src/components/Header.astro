@@ -1,10 +1,22 @@
 ---
-import themeConfig from '@/config'
+import LanguageSwitcherIcon from '@/components/SvgIcons/LanguageSwitcherIcon.astro'
+import ThemeToggleIcon from '@/components/SvgIcons/ThemeToggleIcon.astro'
+import themeConfig, { moreLocales } from '@/config'
+import { getNextGlobalLangPath, getNextSupportedLangPath } from '@/i18n/path'
 import { ui } from '@/i18n/ui'
 import { getPageInfo } from '@/utils/page'
 
+interface Props {
+  supportedLangs?: string[]
+}
+
+const { supportedLangs = [] } = Astro.props
 const { currentLang, getLocalizedPath, isPost } = getPageInfo(Astro.url.pathname)
 const { title, subtitle, i18nTitle } = themeConfig.site
+const {
+  light: { background: lightMode },
+  dark: { background: darkMode },
+} = themeConfig.color
 
 const currentUI = ui[currentLang as keyof typeof ui] ?? {}
 const headerTitle = i18nTitle ? currentUI.title : title
@@ -12,6 +24,69 @@ const headerSubtitle = i18nTitle ? currentUI.subtitle : subtitle
 
 const TitleTag = isPost ? 'h2' : 'h1'
 const SubtitleTag = isPost ? 'div' : 'h2'
+
+// 改进的导航活跃状态逻辑
+function getActiveRoute(pathname: string) {
+  if (pathname === '/')
+return 'home'
+  if (pathname.startsWith('/posts/'))
+return 'posts'
+  if (pathname.startsWith('/tags/'))
+return 'tags'
+  if (pathname.startsWith('/about/'))
+return 'about'
+  return 'none'
+}
+
+const activeRoute = getActiveRoute(Astro.url.pathname)
+
+function getNavItemClass(isActive: boolean) {
+  return isActive
+    ? 'highlight-static c-primary font-bold after:bottom-0.7em'
+    : 'highlight-hover transition-[colors,font-weight] after:bottom-0.7em hover:(c-primary font-bold)'
+}
+
+const navItems = [
+  {
+    href: '/',
+    label: '首页',
+    className: getNavItemClass(activeRoute === 'home'),
+    route: 'home',
+  },
+  {
+    label: currentUI.posts || '文章',
+    className: getNavItemClass(activeRoute === 'posts'),
+    route: 'posts',
+    children: [
+      {
+        href: '/posts/work-docs/',
+        label: '工作文档记录',
+      },
+      {
+        href: '/posts/scattered-notes/',
+        label: '零散笔记',
+      },
+    ],
+  },
+  {
+    href: '/tags/',
+    label: currentUI.tags,
+    className: getNavItemClass(activeRoute === 'tags'),
+    route: 'tags',
+  },
+  {
+    href: '/about/',
+    label: currentUI.about,
+    className: getNavItemClass(activeRoute === 'about'),
+    route: 'about',
+  },
+]
+
+// Language switcher
+const showLanguageSwitcher = moreLocales.length > 0
+const nextUrl = supportedLangs.length > 0
+  ? getNextSupportedLangPath(Astro.url.pathname, supportedLangs)
+  : getNextGlobalLangPath(Astro.url.pathname)
 ---
 
 <header
@@ -22,6 +97,99 @@ const SubtitleTag = isPost ? 'div' : 'h2'
     'lg:(uno-desktop-column top-20) cjk:tracking-0.02em',
   ]}
 >
+  <!-- Top Navigation Bar -->
+  <div class="mb-8 w-full border-b border-gray-200 dark:border-gray-700">
+    <div class="mx-auto max-w-6xl px-4 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Navigation Menu -->
+        <nav
+          aria-label="Site Navigation"
+          class:list={[
+            'text-3.6 font-semibold leading-2.45em font-navbar',
+            'lg:(text-4) cjk:tracking-0.02em',
+          ]}
+        >
+          <ul class="flex items-center gap-6">
+            {navItems.map(item => (
+              <li class="group relative">
+                {item.children
+? (
+                  <div class="dropdown">
+                    <span
+                      class:list={[
+                        item.className,
+                        'flex items-center gap-1 cursor-default select-none',
+                      ]}
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    >
+                      {item.label}
+                      <span class="text-xs transition-transform duration-300 ease-out group-hover:rotate-180">▼</span>
+                    </span>
+                    <ul
+                      class="invisible absolute left-0 top-full z-50 mt-2 min-w-48 transform border border-gray-200 rounded-lg bg-white py-2 opacity-0 shadow-xl transition-all duration-300 ease-out group-hover:visible -translate-y-2 group-hover:translate-y-0 dark:border-gray-700 dark:bg-gray-800 group-hover:opacity-100"
+                      role="menu"
+                      aria-label={`${item.label}子菜单`}
+                    >
+                      {item.children.map(child => (
+                        <li role="none">
+                          <a
+                            href={getLocalizedPath(child.href)}
+                            class="block px-4 py-3 text-sm transition-all duration-200 hover:bg-gray-100 hover:pl-6 hover:c-primary dark:hover:bg-gray-700"
+                            role="menuitem"
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+: (
+                  <a
+                    href={getLocalizedPath(item.href)}
+                    class={item.className}
+                  >
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Controls (Language Switcher + Theme Toggle) -->
+        <div class="flex items-center gap-4">
+          <!-- Language Switcher -->
+          {showLanguageSwitcher && (
+            <a
+              id="language-switcher"
+              href={nextUrl}
+              class="aspect-square w-4 c-secondary transition-all duration-200 active:scale-90 hover:c-primary"
+              aria-label="Switch website language"
+            >
+              <LanguageSwitcherIcon
+                aria-hidden="true"
+                fill="currentColor"
+              />
+            </a>
+          )}
+
+          <!-- Theme Toggle -->
+          <button
+            id="theme-toggle-button"
+            class="aspect-square w-4 c-secondary transition-all duration-200 active:scale-90 hover:c-primary"
+            aria-label="Switch light/dark theme"
+          >
+            <ThemeToggleIcon
+              aria-hidden="true"
+              fill="currentColor"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Site Title and Subtitle -->
   <TitleTag
@@ -61,4 +229,199 @@ const SubtitleTag = isPost ? 'div' : 'h2'
     </SubtitleTag>
   )}
 </header>
+
+<!-- Theme Toggle Script -->
+<script
+  is:inline
+  define:vars={{
+    lightMode,
+    darkMode,
+ }}
+>
+// Apply theme changes
+function applyTheme(isDark) {
+  document.documentElement.classList.toggle('dark', isDark)
+
+  // Update meta theme-color tag
+  const metaThemeColor = document.head.querySelector('meta[name="theme-color"]')
+  if (metaThemeColor && lightMode && darkMode) {
+    metaThemeColor.setAttribute('content', isDark ? darkMode : lightMode)
+  }
+
+  localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  document.dispatchEvent(new Event('theme-changed'))
+}
+
+// Toggle theme mode
+function toggleTheme() {
+  const isDark = !document.documentElement.classList.contains('dark')
+  applyTheme(isDark)
+}
+
+// Handle theme toggle click events
+function handleThemeToggleClick(e) {
+  const target = e.target instanceof Element ? e.target : null
+  const button = target?.closest('#theme-toggle-button')
+
+  if (!button) {
+    return
+  }
+
+  // If reduceMotion is enabled, update theme directly
+  if (document.documentElement.classList.contains('reduce-motion')) {
+    toggleTheme()
+    return
+  }
+
+  // Add temporary markers before view transition
+  document.documentElement.style.setProperty('view-transition-name', 'animation-theme-toggle')
+  document.documentElement.setAttribute('data-theme-changing', '')
+
+  // Use View Transitions API for theme toggle
+  const transition = document.startViewTransition(toggleTheme)
+
+  // Remove temporary markers after view transition
+  transition.finished.then(() => {
+    document.documentElement.style.removeProperty('view-transition-name')
+    document.documentElement.removeAttribute('data-theme-changing')
+  })
+}
+
+// Bind click event to the button
+document.addEventListener('click', handleThemeToggleClick, { passive: true })
+
+// Listen to system theme changes in real time
+window.matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener('change', (event) => {
+    const isDark = event.matches
+    // Apply system theme preference
+    applyTheme(isDark)
+  })
+
+// Enhanced keyboard navigation for dropdown menus
+document.addEventListener('keydown', (e) => {
+  // Close dropdown menus when Escape is pressed
+  if (e.key === 'Escape') {
+    const dropdowns = document.querySelectorAll('.dropdown')
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove('dropdown-open')
+    })
+  }
+
+  // Navigate dropdown items with arrow keys
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    const activeDropdown = document.querySelector('.dropdown:hover')
+    if (activeDropdown) {
+      e.preventDefault()
+      const menuItems = activeDropdown.querySelectorAll('a[role="menuitem"]')
+      const currentFocus = document.activeElement
+      const currentIndex = Array.from(menuItems).indexOf(currentFocus)
+
+      let nextIndex = e.key === 'ArrowDown' ? currentIndex + 1 : currentIndex - 1
+      if (nextIndex >= menuItems.length)
+        nextIndex = 0
+      if (nextIndex < 0)
+        nextIndex = menuItems.length - 1
+
+      menuItems[nextIndex]?.focus()
+    }
+  }
+})
+</script>
+
+<style>
+/* Enhanced dropdown styles with improved animations */
+.dropdown ul {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+}
+
+.dropdown:hover ul {
+  animation: dropdownSlideIn 0.3s ease-out;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced hover effects */
+.dropdown ul li a {
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown ul li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--primary-color, #3b82f6);
+  transform: translateX(-100%);
+  transition: transform 0.2s ease-out;
+}
+
+.dropdown ul li a:hover::before {
+  transform: translateX(0);
+}
+
+/* Mobile responsive enhancements */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .dropdown ul {
+    position: static;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0.5rem 0 0 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .dropdown ul li a {
+    padding: 0.5rem 0;
+    background: transparent;
+    font-size: 0.9rem;
+  }
+
+  .dropdown ul li a:hover {
+    padding-left: 0;
+    background: transparent;
+  }
+
+  .dropdown ul li a::before {
+    display: none;
+  }
+}
+
+/* Focus visible states for accessibility */
+.dropdown:focus-within ul,
+.dropdown:focus-within ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-color, #3b82f6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+</style>
 
