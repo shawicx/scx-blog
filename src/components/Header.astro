@@ -90,26 +90,50 @@ const nextUrl = supportedLangs.length > 0
 ---
 
 <header
-  class:list={[
-    isPost
-    ? 'mb-10.8'
-    : 'mb-10.5',
-    'lg:(uno-desktop-column top-20) cjk:tracking-0.02em',
-  ]}
+  class="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md dark:border-gray-700 dark:bg-gray-900/80"
 >
   <!-- Top Navigation Bar -->
-  <div class="mb-8 w-full border-b border-gray-200 dark:border-gray-700">
-    <div class="mx-auto max-w-6xl px-4 py-4">
+  <div class="w-full">
+    <div class="mx-auto max-w-6xl px-4 py-3">
       <div class="flex items-center justify-between">
-        <!-- Navigation Menu -->
+        <!-- Logo/Site Title on the left -->
+        <div class="flex flex-col">
+          <TitleTag
+            class:list={[
+              'text-4.5 c-primary font-bold font-title',
+              'lg:(text-5.5)',
+            ]}
+          >
+            <a
+              id="site-title-link"
+              href={getLocalizedPath('/')}
+              class="transition-colors duration-200 hover:underline"
+            >
+              {headerTitle}
+            </a>
+          </TitleTag>
+          <!-- Site Subtitle next to the title -->
+          {headerSubtitle && (
+            <SubtitleTag
+              class:list={[
+                'text-3 c-secondary font-navbar text-center mt-1',
+              ]}
+              aria-hidden={isPost}
+            >
+              {headerSubtitle}
+            </SubtitleTag>
+          )}
+        </div>
+
+        <!-- Navigation Menu in the center -->
         <nav
           aria-label="Site Navigation"
           class:list={[
-            'text-3.6 font-semibold leading-2.45em font-navbar',
-            'lg:(text-4) cjk:tracking-0.02em',
+            'text-3.4 font-semibold leading-2.45em font-navbar',
+            'lg:(text-3.8) cjk:tracking-0.02em',
           ]}
         >
-          <ul class="flex items-center gap-6">
+          <ul class="flex items-center gap-5 lg:gap-6">
             {navItems.map(item => (
               <li class="group relative">
                 {item.children
@@ -118,7 +142,7 @@ const nextUrl = supportedLangs.length > 0
                     <span
                       class:list={[
                         item.className,
-                        'flex items-center gap-1 cursor-default select-none',
+                        'flex items-center gap-1 cursor-default select-none transition-colors duration-200',
                       ]}
                       aria-expanded="false"
                       aria-haspopup="true"
@@ -148,7 +172,7 @@ const nextUrl = supportedLangs.length > 0
 : (
                   <a
                     href={getLocalizedPath(item.href)}
-                    class={item.className}
+                    class={`${item.className} transition-colors duration-200`}
                   >
                     {item.label}
                   </a>
@@ -158,8 +182,8 @@ const nextUrl = supportedLangs.length > 0
           </ul>
         </nav>
 
-        <!-- Controls (Language Switcher + Theme Toggle) -->
-        <div class="flex items-center gap-4">
+        <!-- Controls (Language Switcher + Theme Toggle) on the right -->
+        <div class="flex items-center gap-3 lg:gap-4">
           <!-- Language Switcher -->
           {showLanguageSwitcher && (
             <a
@@ -178,10 +202,11 @@ const nextUrl = supportedLangs.length > 0
           <!-- Theme Toggle -->
           <button
             id="theme-toggle-button"
-            class="aspect-square w-4 c-secondary transition-all duration-200 active:scale-90 hover:c-primary"
+            class="group aspect-square w-4 c-secondary transition-all duration-300 active:scale-90 hover:c-primary"
             aria-label="Switch light/dark theme"
           >
             <ThemeToggleIcon
+              class="transition-transform duration-300 group-active:rotate-12 group-hover:rotate-6"
               aria-hidden="true"
               fill="currentColor"
             />
@@ -190,44 +215,6 @@ const nextUrl = supportedLangs.length > 0
       </div>
     </div>
   </div>
-
-  <!-- Site Title and Subtitle -->
-  <TitleTag
-    class:list={[
-      isPost
-        ? `mb-2.8 mt-3 text-5.375 c-secondary lg:(mb-1.8 mt-0 text-9 c-primary)`
-        : `mb-1.8 w-75% text-8 c-primary lg:(w-full text-9)`,
-      'font-bold font-title',
-    ]}
-  >
-    <!-- Fix text cropping issues during view transition on iOS by adding a div tag -->
-    <div
-      class="box-content inline-block pr-1"
-      transition:name={`site-title-${currentLang}`}
-      data-disable-theme-transition
-    >
-      <a
-        id="site-title-link"
-        href={getLocalizedPath('/')}
-      >
-          {headerTitle}
-      </a>
-    </div>
-  </TitleTag>
-
-  {headerSubtitle && (
-    <SubtitleTag
-      class:list={[
-        isPost
-          ? `op-0 lg:op-100`
-          : 'w-75% lg:w-full',
-        'text-3.5 c-secondary font-navbar lg:text-4',
-      ]}
-      aria-hidden={isPost}
-    >
-      {headerSubtitle}
-    </SubtitleTag>
-  )}
 </header>
 
 <!-- Theme Toggle Script -->

@@ -1,15 +1,44 @@
 html {
-  --at-apply: 'bg-background c-secondary antialiased';
+  --at-apply: 'c-secondary antialiased';
   scrollbar-width: thin;
   scrollbar-color: oklch(var(--un-preset-theme-colors-secondary) / 0.25) transparent;
   scrollbar-gutter: stable;
 }
 
-/* Fix Flash Issue On iOS */
+/* Modern炫酷 animated background with dynamic patterns */
 body {
+  background:
+    linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(235deg, rgba(125,125,255,0.05) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(315deg, rgba(100,200,255,0.05) 0%, rgba(255,255,255,0) 20%),
+    radial-gradient(circle at 10% 20%, rgba(255,200,125,0.05) 0%, rgba(255,255,255,0) 20%),
+    radial-gradient(circle at 90% 80%, rgba(180,220,255,0.05) 0%, rgba(255,255,255,0) 20%),
+    #f8fafc;
+  background-attachment: fixed;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  animation: subtleShift 20s ease-in-out infinite;
 }
+
+html.dark body {
+  background:
+    linear-gradient(125deg, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0) 20%),
+    linear-gradient(235deg, rgba(60,60,120,0.1) 0%, rgba(15,23,42,0) 20%),
+    linear-gradient(315deg, rgba(30,58,138,0.1) 0%, rgba(15,23,42,0) 20%),
+    radial-gradient(circle at 10% 20%, rgba(99,102,241,0.1) 0%, rgba(15,23,42,0) 20%),
+    radial-gradient(circle at 90% 80%, rgba(124,58,237,0.1) 0%, rgba(15,23,42,0) 20%),
+    #0f172a;
+  background-attachment: fixed;
+  animation: subtleShift 20s ease-in-out infinite;
+}
+
+@keyframes subtleShift {
+  0%, 100% { background-position: 0% 0%, 100% 0%, 0% 100%, 20% 80%, 80% 20%; }
+  25% { background-position: 0% 2% , 100% 2% , 0% 98% , 22% 78%, 78% 22%; }
+  50% { background-position: 2% 0% , 98% 0% , 2% 100%, 18% 82%, 82% 18%; }
+  75% { background-position: 0% 2% , 100% 2% , 0% 98% , 22% 78%, 78% 22%; }
+}
+
 body::selection {
   --at-apply: 'bg-highlight';
 }
