@@ -5,6 +5,7 @@ export interface Props {
   href: string
   target?: '_blank' | '_self'
   variant?: 'default' | 'featured' | 'compact'
+  external?: boolean
 }
 
 const {
@@ -13,15 +14,17 @@ const {
   href,
   target = '_self',
   variant = 'default',
+  external = false,
 } = Astro.props
 ---
 
 <a
   href={href}
   target={target}
+  rel={external ? 'noopener noreferrer' : undefined}
   class:list={[
     'card-container',
-    'block p-6 rounded-lg border transition-all duration-200',
+    'group block p-6 rounded-lg border transition-all duration-200',
     'bg-white dark:bg-gray-800',
     'border-gray-200 dark:border-gray-700',
     'hover:border-primary hover:shadow-md',
@@ -33,15 +36,20 @@ const {
     },
   ]}
 >
-  <h3 class="card-title mb-2 text-xl c-primary font-semibold transition-colors">
-    {title}
-  </h3>
-  <p class="card-description mb-3 text-sm c-secondary leading-relaxed">
-    {description}
-  </p>
-  <div class="card-link flex items-center text-sm c-primary font-medium">
-    了解更多
-    <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
+  <div>
+    <h3 class="card-title mb-2 text-xl c-primary font-semibold transition-colors">
+      {title}
+    </h3>
+    <p class="card-description mb-3 text-sm c-secondary leading-relaxed">
+      {description}
+    </p>
+    <div class="card-link flex items-center text-sm c-primary font-medium">
+      {external ? '访问项目' : '了解更多'}
+      <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
+      {external && (
+        <span class="ml-2 text-xs c-secondary opacity-70">↗</span>
+      )}
+    </div>
   </div>
 </a>
 
