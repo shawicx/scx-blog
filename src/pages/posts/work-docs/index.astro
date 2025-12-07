@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content'
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// 获取 work-docs 目录下的文章
+const workDocsPosts = await getCollection('posts', ({ id, _data }) => {
+  // 筛选属于 work-docs 目录的文章，排除 index.md 文件
+  const isInWorkDocs = id.startsWith('work-docs/')
+  const isNotIndex = id !== 'work-docs/index.md' && id !== 'work-docs/index'
+  return isInWorkDocs && isNotIndex
+})
+
+// 按发布日期排序并添加 remarkPluginFrontmatter
+const sortedPosts = await Promise.all(workDocsPosts.map(async (post) => {
+  // Render the post to get remarkPluginFrontmatter
+  const { remarkPluginFrontmatter } = await render(post)
+  return {
+    ...post,
+    remarkPluginFrontmatter,
+  }
+}))
+
+sortedPosts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+// 创建分组数据结构
+const group = {
+  'work-docs': {
+    id: 'work-docs',
+    title: '工作文档记录',
+    description: '项目开发过程中的技术文档、解决方案和经验总结',
+    posts: sortedPosts,
+    level: 1,
+  },
+}
+
+// 将分组转换为 Map 结构
+const groups = new Map()
+groups.set('work-docs', group['work-docs'])
+
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Posts List -->
+  <section class="mb-12">
+    {groups.size > 0
+? (
+      <PostList groups={groups} lang={lang} />
+    )
+: (
+      <p>暂无文章</p>
+    )}
+  </section>
+</Layout>

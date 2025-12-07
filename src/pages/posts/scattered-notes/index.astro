@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content'
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// 获取 scattered-notes 目录下的文章
+const scatteredNotesPosts = await getCollection('posts', ({ id, _data }) => {
+  // 筛选属于 scattered-notes 目录的文章，排除 index.md 文件
+  const isInScatteredNotes = id.startsWith('scattered-notes/')
+  const isNotIndex = id !== 'scattered-notes/index.md' && id !== 'scattered-notes/index'
+  return isInScatteredNotes && isNotIndex
+})
+
+// 按发布日期排序并添加 remarkPluginFrontmatter
+const sortedPosts = await Promise.all(scatteredNotesPosts.map(async (post) => {
+  // Render the post to get remarkPluginFrontmatter
+  const { remarkPluginFrontmatter } = await render(post)
+  return {
+    ...post,
+    remarkPluginFrontmatter,
+  }
+}))
+
+sortedPosts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+// 创建分组数据结构
+const group = {
+  'scattered-notes': {
+    id: 'scattered-notes',
+    title: '零散笔记',
+    description: '技术学习和开发过程中的零散记录和思考',
+    posts: sortedPosts,
+    level: 1,
+  },
+}
+
+// 将分组转换为 Map 结构
+const groups = new Map()
+groups.set('scattered-notes', group['scattered-notes'])
+
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Posts List -->
+  <section class="mb-12">
+    {groups.size > 0
+? (
+      <PostList groups={groups} lang={lang} />
+    )
+: (
+      <p>暂无文章</p>
+    )}
+  </section>
+</Layout>
