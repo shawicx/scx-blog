@@ -4,7 +4,7 @@ import PostList from '@/components/PostList.astro'
 import Layout from '@/layouts/Layout.astro'
 
 // 获取 work-docs 目录下的文章
-const workDocsPosts = await getCollection('posts', ({ id, _data }) => {
+const workDocsPosts = await getCollection('posts', ({ id }) => {
   // 筛选属于 work-docs 目录的文章，排除 index.md 文件
   const isInWorkDocs = id.startsWith('work-docs/')
   const isNotIndex = id !== 'work-docs/index.md' && id !== 'work-docs/index'

@@ -12,7 +12,7 @@ interface HomeCard {
   variant: 'default' | 'featured' | 'compact'
 }
 
-// 首页卡片数据
+// 首页卡片数据 - 只展示外部项目，去掉内部博客导航
 const homeCards: HomeCard[] = [
   {
     title: '个人博客',
@@ -50,24 +50,6 @@ const homeCards: HomeCard[] = [
     icon: '',
     variant: 'default',
   },
-  {
-    title: '技术文档',
-    description: '浏览所有技术文档与学习笔记',
-    href: '/posts/',
-    icon: '',
-    target: '_self',
-    external: false,
-    variant: 'default',
-  },
-  {
-    title: '关于我',
-    description: '了解更多关于我的信息',
-    href: '/about/',
-    icon: '',
-    target: '_self',
-    external: false,
-    variant: 'default',
-  },
 ]
 ---
 
@@ -92,7 +74,6 @@ const homeCards: HomeCard[] = [
           href={card.href}
           target={card.target}
           variant={card.variant}
-          icon={card.icon}
           external={card.external}
         />
       ))}
