@@ -1,0 +1,53 @@
+---
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import PostCard from '@/components/PostCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCategoryPostInfo } from '@/utils/category'
+
+const category = 'projects/uniubi'
+const lang = 'zh'
+const posts = await getCategoryPostInfo(category, lang)
+const { title, description, postList } = posts
+---
+
+<Layout postTitle={title} postDescription={description}>
+  <article class="heti">
+    <!-- Breadcrumb -->
+    <Breadcrumb
+      type="category"
+      items={[
+      { name: '项目实战', href: '/posts/projects/' },
+      { name: 'Uniubi 项目', href: '/posts/projects/uniubi/' },
+    ]}
+    />
+
+    <!-- Category Header -->
+    <header class="mb-12">
+      <h1 class="mb-4 text-4xl c-primary font-bold">{title}</h1>
+      <p class="text-lg c-secondary leading-relaxed">{description}</p>
+      <p class="mt-2 text-sm c-secondary">
+        共 {postList.length} 篇文章
+      </p>
+    </header>
+
+    <!-- Posts List -->
+    <section>
+      {postList.length > 0
+? (
+        <ul>
+          {postList.map(post => (
+            <PostCard post={post} lang={lang} />
+          ))}
+        </ul>
+      )
+: (
+        <div class="py-12 text-center">
+          <p class="c-secondary">该分类下暂无文章</p>
+          <a href="/posts/projects/" class="mt-4 inline-block text-primary hover:underline">
+            返回项目实战
+          </a>
+        </div>
+      )}
+    </section>
+  </article>
+</Layout>

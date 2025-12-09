@@ -2,10 +2,11 @@
 import { getPageInfo } from '@/utils/page'
 
 interface Props {
-  type?: 'default' | 'post'
+  type?: 'default' | 'post' | 'category'
+  items?: Array<{ name: string, href: string }>
 }
 
-const { type = 'default' } = Astro.props
+const { type = 'default', items } = Astro.props
 const { currentLang, getLocalizedPath } = getPageInfo(Astro.url.pathname)
 
 // 生成面包屑数据
@@ -116,7 +117,10 @@ continue
   return breadcrumbs
 }
 
-const breadcrumbs = generateBreadcrumbs(Astro.url.pathname)
+// 使用传入的 items（用于分类页面）或自动生成
+const breadcrumbs = type === 'category' && items
+  ? [{ label: '首页', href: '/' }, ...items.map(item => ({ label: item.name, href: item.href }))]
+  : generateBreadcrumbs(Astro.url.pathname)
 ---
 
 {breadcrumbs.length > 1 && (

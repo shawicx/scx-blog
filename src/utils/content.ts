@@ -12,12 +12,16 @@ export type Post = CollectionEntry<'posts'> & {
 const metaCache = new Map<string, { minutes: number }>()
 
 /**
+ * Export the addMetaToPost function for use in other modules
+ */
+
+/**
  * Add metadata including reading time to a post
  *
  * @param post The post to enhance with metadata
  * @returns Enhanced post with reading time information
  */
-async function addMetaToPost(post: CollectionEntry<'posts'>): Promise<Post> {
+export async function addMetaToPost(post: CollectionEntry<'posts'>): Promise<Post> {
   const cacheKey = `${post.id}-${post.data.lang || 'universal'}`
 
   if (metaCache.has(cacheKey)) {
@@ -259,23 +263,25 @@ async function _getGroupInfo(groupId: string, lang?: string): Promise<PostGroup 
       const isIndexFile = id === groupId || id === `${groupId}/index` || id === `${groupId}/index.md`
       const hasCorrectLang = data.lang === lang || data.lang === ''
       const shouldInclude = import.meta.env.DEV || !data.draft
-      
+
       return isIndexFile && hasCorrectLang && shouldInclude
     })
 
-    if (indexPosts.length === 0) return null
+    if (indexPosts.length === 0)
+      return null
 
     const indexPost = indexPosts[0]
     const level = groupId.split('/').length
-    
+
     return {
       id: groupId,
       title: indexPost.data.title,
       description: indexPost.data.description || '',
       posts: [],
-      level
+      level,
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error getting group info for', groupId, error)
     return null
   }
@@ -290,18 +296,18 @@ async function _getPostsByGroups(lang?: string): Promise<Map<string, PostGroup>>
 
   // First, identify all group index files to exclude them from regular posts
   const groupIndexIds = new Set<string>()
-  
+
   // Collect all folder paths (max 3 levels) and identify group indexes
   const folderPaths = new Set<string>()
-  
-  posts.forEach(post => {
+
+  posts.forEach((post) => {
     const pathParts = post.id.split('/')
-    
+
     // Skip direct files in posts root
     if (pathParts.length <= 1) {
       return
     }
-    
+
     // Generate folder paths for up to 3 levels
     for (let i = 1; i <= Math.min(3, pathParts.length - 1); i++) {
       const folderPath = pathParts.slice(0, i).join('/')
@@ -310,13 +316,12 @@ async function _getPostsByGroups(lang?: string): Promise<Map<string, PostGroup>>
   })
 
   // Identify which posts are group index files
-  posts.forEach(post => {
+  posts.forEach((post) => {
     // Check if this post is an index file for any folder
     if (folderPaths.has(post.id) || post.id.endsWith('/index')) {
       groupIndexIds.add(post.id)
     }
   })
-
 
   // Create groups for each folder
   for (const folderPath of folderPaths) {
@@ -327,22 +332,22 @@ async function _getPostsByGroups(lang?: string): Promise<Map<string, PostGroup>>
   }
 
   // Assign posts to their respective groups (excluding group index files)
-  posts.forEach(post => {
+  posts.forEach((post) => {
     const pathParts = post.id.split('/')
-    
+
     // Skip group index files - they are descriptions, not content
     if (groupIndexIds.has(post.id)) {
       return
     }
-    
+
     // Skip direct files in posts root
     if (pathParts.length <= 1) {
       return
     }
-    
+
     // Find the most specific group this post belongs to (deepest folder)
     let targetGroup: string | null = null
-    
+
     // Check from deepest to shallowest level to find the most specific group
     for (let i = Math.min(3, pathParts.length - 1); i >= 1; i--) {
       const folderPath = pathParts.slice(0, i).join('/')
@@ -351,15 +356,14 @@ async function _getPostsByGroups(lang?: string): Promise<Map<string, PostGroup>>
         break
       }
     }
-    
-    
+
     if (targetGroup && groupMap.has(targetGroup)) {
       groupMap.get(targetGroup)!.posts.push(post)
     }
   })
 
   // Sort posts within each group by date
-  groupMap.forEach(group => {
+  groupMap.forEach((group) => {
     group.posts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
   })
 

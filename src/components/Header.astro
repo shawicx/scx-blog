@@ -65,10 +65,6 @@ const navItems = [
     route: 'tutorials',
     children: [
       {
-        href: '/posts/tutorials/',
-        label: '全部教程',
-      },
-      {
         href: '/posts/tutorials/frontend/',
         label: '前端开发',
       },
@@ -88,16 +84,12 @@ const navItems = [
     route: 'projects',
     children: [
       {
-        href: '/posts/projects/',
-        label: '全部项目',
-      },
-      {
         href: '/posts/projects/uniubi/',
-        label: 'Uniubi 项目',
+        label: 'Uniubi',
       },
       {
         href: '/posts/projects/viewshine/',
-        label: 'Viewshine 项目',
+        label: 'Viewshine',
       },
     ],
   },
@@ -106,10 +98,6 @@ const navItems = [
     className: getNavItemClass(activeRoute === 'notes'),
     route: 'notes',
     children: [
-      {
-        href: '/posts/notes/',
-        label: '全部笔记',
-      },
       {
         href: '/posts/notes/concepts/',
         label: '概念理解',

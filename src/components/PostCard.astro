@@ -1,0 +1,64 @@
+---
+import type { Post } from '@/utils/content'
+import PostDate from '@/components/PostDate.astro'
+import TagList from '@/components/TagList.astro'
+import { getPostPath } from '@/i18n/path'
+import { getPostDescription } from '@/utils/description'
+
+interface Props {
+  post: Post
+  lang?: string
+}
+
+const { post, lang = 'zh' } = Astro.props
+const slug = post.data.abbrlink || post.id
+const href = getPostPath(slug, lang)
+---
+
+<li class="mb-5.5">
+  {/* post title */}
+  <h3 class="inline transition-colors hover:c-primary">
+    <a
+      class="text-2xl font-medium cjk:tracking-0.02em"
+      href={href}
+      transition:name={`post-${slug}${lang ? `-${lang}` : ''}`}
+      data-disable-theme-transition
+    >
+      {post.data.title}
+    </a>
+  </h3>
+
+  {/* mobile post time */}
+  <div
+    class="py-0.8 text-3.5 font-time lg:hidden"
+    transition:name={`time-${slug}${lang ? `-${lang}` : ''}`}
+    data-disable-theme-transition
+  >
+    <PostDate
+      date={post.data.published}
+      updatedDate={post.data.updated}
+      minutes={post.remarkPluginFrontmatter.minutes}
+    />
+  </div>
+
+  {/* desktop post time */}
+  <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
+    <PostDate
+      date={post.data.published}
+      updatedDate={post.data.updated}
+      minutes={post.remarkPluginFrontmatter.minutes}
+    />
+  </div>
+
+  {/* desktop post description */}
+  <div class="heti hidden" lg="mt-2.25 block">
+    <p class="c-secondary">{getPostDescription(post, 'list')}</p>
+  </div>
+
+  {/* tags */}
+  {post.data.tags && post.data.tags.length > 0 && (
+    <div class="mt-2 lg:mt-3">
+      <TagList tags={post.data.tags} lang={lang} />
+    </div>
+  )}
+</li>
