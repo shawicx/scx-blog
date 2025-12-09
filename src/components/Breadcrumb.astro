@@ -1,0 +1,160 @@
+---
+import { getPageInfo } from '@/utils/page'
+
+interface Props {
+  type?: 'default' | 'post'
+}
+
+const { type = 'default' } = Astro.props
+const { currentLang, getLocalizedPath } = getPageInfo(Astro.url.pathname)
+
+// 生成面包屑数据
+function generateBreadcrumbs(pathname: string) {
+  const segments = pathname.split('/').filter(segment => segment)
+  const breadcrumbs = [{ label: '首页', href: '/' }]
+
+  let currentPath = ''
+
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i]
+    currentPath += `/${segment}`
+
+    // 跳过语言路径段
+    if (segment === currentLang)
+continue
+
+    // 根据路径段生成标签
+    let label = segment
+    switch (segment) {
+      case 'posts':
+        if (i + 1 < segments.length) {
+          const nextSegment = segments[i + 1]
+          switch (nextSegment) {
+            case 'tutorials':
+              label = '技术教程'
+              break
+            case 'projects':
+              label = '项目实战'
+              break
+            case 'notes':
+              label = '学习笔记'
+              break
+            default:
+              label = '文章'
+          }
+        }
+ else {
+          label = '文章'
+        }
+        break
+      case 'tutorials':
+        if (i + 1 < segments.length) {
+          const nextSegment = segments[i + 1]
+          switch (nextSegment) {
+            case 'frontend':
+              label = '前端开发'
+              break
+            case 'backend':
+              label = '后端开发'
+              break
+            case 'tools':
+              label = '工具使用'
+              break
+          }
+        }
+ else {
+          label = '教程'
+        }
+        break
+      case 'projects':
+        if (i + 1 < segments.length) {
+          label = segments[i + 1] === 'uniubi' ? 'Uniubi 项目' : 'Viewshine 项目'
+        }
+ else {
+          label = '项目'
+        }
+        break
+      case 'notes':
+        if (i + 1 < segments.length) {
+          const nextSegment = segments[i + 1]
+          switch (nextSegment) {
+            case 'concepts':
+              label = '概念理解'
+              break
+            case 'snippets':
+              label = '代码片段'
+              break
+          }
+        }
+ else {
+          label = '笔记'
+        }
+        break
+      case 'tags':
+        label = '标签'
+        break
+      case 'about':
+        label = '关于我'
+        break
+      default:
+        // 对于文章标题，尝试从文件名解析
+        if (segment.endsWith('.md')) {
+          label = segment.replace(/-/g, ' ').replace('.md', '')
+        }
+        break
+    }
+
+    // 如果是最后一个段且是文章页面，不添加链接
+    if (i === segments.length - 1 && type === 'post') {
+      breadcrumbs.push({ label, href: currentPath })
+    }
+ else if (i < segments.length - 1 || (i === segments.length - 1 && type === 'default')) {
+      breadcrumbs.push({ label, href: currentPath })
+    }
+  }
+
+  return breadcrumbs
+}
+
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname)
+---
+
+{breadcrumbs.length > 1 && (
+  <nav aria-label="面包屑导航" class="mb-4">
+    <ol class="flex items-center text-sm text-gray-600 space-x-2 dark:text-gray-400">
+      {breadcrumbs.map((crumb, index) => (
+        <li class="flex items-center">
+          {index === 0
+? (
+            <a
+              href={getLocalizedPath(crumb.href)}
+              class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              {crumb.label}
+            </a>
+          )
+: index === breadcrumbs.length - 1
+? (
+            <span class="text-gray-900 font-medium dark:text-gray-100">{crumb.label}</span>
+          )
+: (
+            <>
+              <span class="mx-2 text-gray-400">/</span>
+              <a
+                href={getLocalizedPath(crumb.href)}
+                class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              >
+                {crumb.label}
+              </a>
+            </>
+          )}
+        </li>
+      ))}
+      {breadcrumbs.length > 1 && (
+        <li class="flex items-center">
+          <span class="mx-2 text-gray-400">/</span>
+        </li>
+      )}
+    </ol>
+  </nav>
+)}

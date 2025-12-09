@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content'
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// 获取 tutorials 目录下的文章
+const tutorialsPosts = await getCollection('posts', ({ id }) => {
+  const isInTutorials = id.startsWith('tutorials/')
+  const isNotIndex = !id.endsWith('tutorials/index.md') && !id.endsWith('tutorials/index')
+  return isInTutorials && isNotIndex
+})
+
+// 按发布日期排序并添加 remarkPluginFrontmatter
+const sortedPosts = await Promise.all(tutorialsPosts.map(async (post) => {
+  const { remarkPluginFrontmatter } = await render(post)
+  return {
+    ...post,
+    remarkPluginFrontmatter,
+  }
+}))
+
+sortedPosts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+// 按子分类分组
+const frontendPosts = sortedPosts.filter(post => post.data.category === 'frontend')
+const backendPosts = sortedPosts.filter(post => post.data.category === 'backend')
+const toolsPosts = sortedPosts.filter(post => post.data.category === 'tools')
+
+// 创建分组数据结构
+const groups = new Map()
+
+if (frontendPosts.length > 0) {
+  groups.set('frontend', {
+    id: 'frontend',
+    title: '前端开发',
+    description: 'JavaScript、TypeScript、框架使用等前端技术教程',
+    posts: frontendPosts,
+    level: 2,
+  })
+}
+
+if (backendPosts.length > 0) {
+  groups.set('backend', {
+    id: 'backend',
+    title: '后端开发',
+    description: 'Node.js、数据库、API 设计等后端技术教程',
+    posts: backendPosts,
+    level: 2,
+  })
+}
+
+if (toolsPosts.length > 0) {
+  groups.set('tools', {
+    id: 'tools',
+    title: '工具使用',
+    description: '开发工具、调试技巧、最佳实践等',
+    posts: toolsPosts,
+    level: 2,
+  })
+}
+
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Breadcrumb -->
+  <Breadcrumb />
+
+  <!-- Page Title -->
+  <div class="mb-8">
+    <h1 class="mb-4 text-4xl text-gray-900 font-bold dark:text-gray-100">技术教程</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400">
+      精心整理的技术教程，涵盖前端、后端和工具使用等多个方面
+    </p>
+  </div>
+
+  <!-- Posts List -->
+  <section class="mb-12">
+    {groups.size > 0
+    ? (
+      <PostList groups={groups} lang={lang} />
+    )
+    : (
+      <p class="text-gray-600 dark:text-gray-400">暂无教程</p>
+    )}
+  </section>
+</Layout>

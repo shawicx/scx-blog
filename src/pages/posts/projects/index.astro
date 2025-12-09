@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content'
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// 获取 projects 目录下的文章
+const projectsPosts = await getCollection('posts', ({ id }) => {
+  const isInProjects = id.startsWith('projects/')
+  const isNotIndex = !id.endsWith('projects/index.md') && !id.endsWith('projects/index')
+  return isInProjects && isNotIndex
+})
+
+// 按发布日期排序并添加 remarkPluginFrontmatter
+const sortedPosts = await Promise.all(projectsPosts.map(async (post) => {
+  const { remarkPluginFrontmatter } = await render(post)
+  return {
+    ...post,
+    remarkPluginFrontmatter,
+  }
+}))
+
+sortedPosts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+// 按项目分组
+const uniubiPosts = sortedPosts.filter(post => post.id.includes('uniubi/'))
+const viewshinePosts = sortedPosts.filter(post => post.id.includes('viewshine/'))
+
+// 创建分组数据结构
+const groups = new Map()
+
+if (uniubiPosts.length > 0) {
+  groups.set('uniubi', {
+    id: 'uniubi',
+    title: 'Uniubi 项目',
+    description: '在宇泛工作期间参与的项目记录和技术方案',
+    posts: uniubiPosts,
+    level: 2,
+  })
+}
+
+if (viewshinePosts.length > 0) {
+  groups.set('viewshine', {
+    id: 'viewshine',
+    title: 'Viewshine 项目',
+    description: '威星项目相关的开发记录和技术文档',
+    posts: viewshinePosts,
+    level: 2,
+  })
+}
+
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Breadcrumb -->
+  <Breadcrumb />
+
+  <!-- Page Title -->
+  <div class="mb-8">
+    <h1 class="mb-4 text-4xl text-gray-900 font-bold dark:text-gray-100">项目实战</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400">
+      真实项目开发过程中的技术记录、方案设计和问题解决经验
+    </p>
+  </div>
+
+  <!-- Posts List -->
+  <section class="mb-12">
+    {groups.size > 0
+    ? (
+      <PostList groups={groups} lang={lang} />
+    )
+    : (
+      <p class="text-gray-600 dark:text-gray-400">暂无项目记录</p>
+    )}
+  </section>
+</Layout>

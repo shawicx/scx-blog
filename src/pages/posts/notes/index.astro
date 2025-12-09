@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content'
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import PostList from '@/components/PostList.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// 获取 notes 目录下的文章
+const notesPosts = await getCollection('posts', ({ id }) => {
+  const isInNotes = id.startsWith('notes/')
+  const isNotIndex = !id.endsWith('notes/index.md') && !id.endsWith('notes/index')
+  return isInNotes && isNotIndex
+})
+
+// 按发布日期排序并添加 remarkPluginFrontmatter
+const sortedPosts = await Promise.all(notesPosts.map(async (post) => {
+  const { remarkPluginFrontmatter } = await render(post)
+  return {
+    ...post,
+    remarkPluginFrontmatter,
+  }
+}))
+
+sortedPosts.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+// 按笔记类型分组
+const conceptsPosts = sortedPosts.filter(post => post.data.type === 'concept')
+const snippetsPosts = sortedPosts.filter(post => post.data.type === 'snippet')
+
+// 创建分组数据结构
+const groups = new Map()
+
+if (conceptsPosts.length > 0) {
+  groups.set('concepts', {
+    id: 'concepts',
+    title: '概念理解',
+    description: '技术概念的学习和深入理解',
+    posts: conceptsPosts,
+    level: 2,
+  })
+}
+
+if (snippetsPosts.length > 0) {
+  groups.set('snippets', {
+    id: 'snippets',
+    title: '代码片段',
+    description: '实用的代码片段和技巧总结',
+    posts: snippetsPosts,
+    level: 2,
+  })
+}
+
+const lang = 'zh'
+---
+
+<Layout>
+  <!-- Breadcrumb -->
+  <Breadcrumb />
+
+  <!-- Page Title -->
+  <div class="mb-8">
+    <h1 class="mb-4 text-4xl text-gray-900 font-bold dark:text-gray-100">学习笔记</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400">
+      学习过程中的概念理解、代码片段和思考记录
+    </p>
+  </div>
+
+  <!-- Posts List -->
+  <section class="mb-12">
+    {groups.size > 0
+    ? (
+      <PostList groups={groups} lang={lang} />
+    )
+    : (
+      <p class="text-gray-600 dark:text-gray-400">暂无笔记</p>
+    )}
+  </section>
+</Layout>

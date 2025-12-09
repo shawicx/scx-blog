@@ -15,6 +15,11 @@ const posts = defineCollection({
       z.date().optional(),
     ),
     tags: z.array(z.string()).optional().default([]),
+    // 新增的字段
+    difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+    estimatedReadTime: z.number().int().min(1).optional(),
+    category: z.enum(['frontend', 'backend', 'tools', 'projects', 'notes', 'miscellaneous']).optional(),
+    type: z.enum(['tutorial', 'project', 'note', 'concept', 'snippet']).optional(),
     // Advanced
     draft: z.boolean().optional().default(false),
     pin: z.number().int().min(0).max(99).optional().default(0),

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
+import Breadcrumb from '@/components/Breadcrumb.astro'
 import Comment from '@/components/Comment/Index.astro'
 import PostDate from '@/components/PostDate.astro'
 import TagList from '@/components/TagList.astro'
@@ -107,6 +108,9 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
   supportedLangs={supportedLangs}
 >
   <article class="heti">
+    <!-- Breadcrumb -->
+    <Breadcrumb type="post" />
+
     <div class="relative">
       <!-- Go Back Button On Desktop -->
       <BackButton />
