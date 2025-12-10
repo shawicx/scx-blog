@@ -1,0 +1,131 @@
+---
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import PostCard from '@/components/PostCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCategoryDisplayName, getCategoryPostInfo } from '@/utils/category'
+
+export interface Props {
+  category: string
+  lang?: string
+}
+
+const { category, lang = 'zh' } = Astro.props
+const posts = await getCategoryPostInfo(category, lang)
+const { title, description, postList } = posts
+
+// 获取分类显示名称
+const categoryName = getCategoryDisplayName(category)
+
+// 生成面包屑导航
+function generateBreadcrumbItems(categoryPath: string) {
+  const parts = categoryPath.split('/')
+  const items = []
+
+  // 根据分类路径生成不同的面包屑
+  const firstLevel = parts[0]
+  switch (firstLevel) {
+    case 'projects':
+      items.push({ name: '项目实战', href: '/posts/projects/' })
+      if (parts[1]) {
+        items.push({
+          name: categoryName,
+          href: `/posts/projects/${parts[1]}/`,
+        })
+      }
+      break
+    case 'notes':
+      items.push({ name: '学习笔记', href: '/posts/notes/' })
+      if (parts[1]) {
+        items.push({
+          name: categoryName,
+          href: `/posts/notes/${parts[1]}/`,
+        })
+      }
+      break
+    case 'tutorials':
+      items.push({ name: '技术教程', href: '/posts/tutorials/' })
+      if (parts[1]) {
+        items.push({
+          name: categoryName,
+          href: `/posts/tutorials/${parts[1]}/`,
+        })
+      }
+      break
+    default:
+      if (parts[0]) {
+        items.push({
+          name: getCategoryDisplayName(parts[0]),
+          href: `/posts/${parts[0]}/`,
+        })
+      }
+      if (parts[1]) {
+        items.push({
+          name: categoryName,
+          href: `/posts/${parts[0]}/${parts[1]}/`,
+        })
+      }
+  }
+
+  return items
+}
+
+const breadcrumbItems = generateBreadcrumbItems(category)
+
+// 获取返回链接
+function getBackLink(categoryPath: string) {
+  const parts = categoryPath.split('/')
+  const firstLevel = parts[0]
+
+  switch (firstLevel) {
+    case 'projects':
+      return { href: '/posts/projects/', text: '返回项目实战' }
+    case 'notes':
+      return { href: '/posts/notes/', text: '返回学习笔记' }
+    case 'tutorials':
+      return { href: '/posts/tutorials/', text: '返回技术教程' }
+    default:
+      return { href: `/posts/${firstLevel}/`, text: `返回${getCategoryDisplayName(firstLevel)}` }
+  }
+}
+
+const backLink = getBackLink(category)
+---
+
+<Layout postTitle={title} postDescription={description}>
+  <article class="heti">
+    <!-- Breadcrumb -->
+    <Breadcrumb
+      type="category"
+      items={breadcrumbItems}
+    />
+
+    <!-- Category Header -->
+    <header class="mb-12">
+      <h1 class="mb-4 text-4xl c-primary font-bold">{title}</h1>
+      <p class="text-lg c-secondary leading-relaxed">{description}</p>
+      <p class="mt-2 text-sm c-secondary">
+        共 {postList.length} 篇文章
+      </p>
+    </header>
+
+    <!-- Posts List -->
+    <section>
+      {postList.length > 0
+      ? (
+        <ul>
+          {postList.map(post => (
+            <PostCard post={post} lang={lang} />
+          ))}
+        </ul>
+      )
+      : (
+        <div class="py-12 text-center">
+          <p class="c-secondary">该分类下暂无文章</p>
+          <a href={backLink.href} class="mt-4 inline-block text-primary hover:underline">
+            {backLink.text}
+          </a>
+        </div>
+      )}
+    </section>
+  </article>
+</Layout>
