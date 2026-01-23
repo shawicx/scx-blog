@@ -2,7 +2,7 @@
 title: '数组去重方法汇总'
 description: 'JavaScript数组去重的多种实现方法和性能对比分析'
 draft: false
-published: 2025-04-01
+published: 2019-04-01
 difficulty: 'intermediate' # beginner | intermediate | advanced
 tags: ['JavaScript', 'Array', 'Algorithm', 'Performance']
 estimatedReadTime: 8 # minutes

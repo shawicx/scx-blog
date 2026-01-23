@@ -2,7 +2,7 @@
 title: 'JavaScript深浅拷贝详解'
 description: '深入理解JavaScript中的深浅拷贝概念，包含多种实现方法和实际应用场景'
 draft: false
-published: 2025-08-09
+published: 2020-08-09
 difficulty: 'intermediate'
 tags: ['JavaScript', '深拷贝', '浅拷贝', '数据类型', '对象操作']
 estimatedReadTime: 12

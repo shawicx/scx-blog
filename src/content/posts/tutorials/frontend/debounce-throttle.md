@@ -2,7 +2,7 @@
 title: '防抖与节流详解'
 description: 'JavaScript中防抖和节流的实现原理、代码示例以及实际应用场景'
 draft: false
-published: 2025-08-09
+published: 2020-08-09
 difficulty: 'intermediate'
 tags: ['JavaScript', 'Performance', 'Optimization', 'Event']
 estimatedReadTime: 12

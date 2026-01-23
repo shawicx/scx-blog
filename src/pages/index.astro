@@ -12,30 +12,30 @@ interface HomeCard {
   variant: 'default' | 'featured' | 'compact'
 }
 
-// 首页卡片数据 - 只展示外部项目，去掉内部博客导航
+// 首页卡片数据
 const homeCards: HomeCard[] = [
   {
     title: '个人博客',
     description: '技术文章、学习心得与工作经验分享',
-    href: 'https://scx-core.vercel.app/',
+    href: 'https://github.com/shawicx/scx-blog.git',
     target: '_blank',
     external: true,
     icon: '',
     variant: 'featured',
   },
   {
-    title: '翻译工具',
-    description: '便捷的在线翻译助手，支持多语言互译',
-    href: 'https://cis-translate.vercel.app/',
+    title: 'API工具',
+    description: '请求函数、请求参数与返回数据类型 代码生成工具',
+    href: 'https://scx-api-tool.netlify.app/',
     target: '_blank',
     external: true,
     icon: '',
     variant: 'default',
   },
   {
-    title: 'API工具',
-    description: '开发者友好的API测试与管理工具',
-    href: 'https://scx-api-tool.netlify.app/',
+    title: '翻译工具',
+    description: '项目需要，输出特定的翻译结果',
+    href: 'https://github.com/x011223/cis-translate',
     target: '_blank',
     external: true,
     icon: '',
@@ -44,7 +44,7 @@ const homeCards: HomeCard[] = [
   {
     title: 'GitHub仓库',
     description: '查看开源项目与代码实现',
-    href: 'https://github.com/shawicx/scx-void',
+    href: 'https://github.com/shawicx',
     target: '_blank',
     external: true,
     icon: '',

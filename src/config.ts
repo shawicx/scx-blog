@@ -167,7 +167,7 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/shawicx/scx-void',
+        url: 'https://github.com/shawicx',
       },
       {
         name: 'Email',
