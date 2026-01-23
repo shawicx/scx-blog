@@ -14,7 +14,7 @@ type: 'project'
 
 Vue 3 带来了许多激动人心的新特性，其中最重要的就是 Composition API。本文将通过丰富的示例来介绍 Vue 3 中最常用的 API，帮助你快速掌握 Vue 3 的核心功能。
 
-## 🚀 Composition API 核心
+## Composition API 核心
 
 ### ref() - 响应式引用
 
@@ -204,7 +204,7 @@ watchEffect(() => {
 </script>
 ```
 
-## 🔄 生命周期钩子
+## 生命周期钩子
 
 Vue 3 的生命周期钩子在 Composition API 中以函数形式提供。
 
@@ -292,7 +292,7 @@ const toggleTimer = () => {
 </script>
 ```
 
-## 🎯 组件通信
+## 组件通信
 
 ### defineProps 和 defineEmits
 
@@ -526,7 +526,7 @@ onMounted(() => {
 </script>
 ```
 
-## 🔧 工具函数
+## 工具函数
 
 ### nextTick
 
@@ -716,7 +716,7 @@ const handleEvent = () => {
 </script>
 ```
 
-## 🚀 性能优化技巧
+## 性能优化技巧
 
 ### shallowRef 和 shallowReactive
 
