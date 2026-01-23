@@ -39,6 +39,8 @@ function getActiveRoute(pathname: string) {
     return 'posts'
   if (pathname.startsWith('/tags/'))
     return 'tags'
+  // if (pathname.startsWith('/stats'))
+  //   return 'stats'
   if (pathname.startsWith('/about/'))
     return 'about'
   return 'none'
@@ -114,6 +116,12 @@ const navItems = [
     className: getNavItemClass(activeRoute === 'tags'),
     route: 'tags',
   },
+  // {
+  //   href: '/stats/',
+  //   label: '统计',
+  //   className: getNavItemClass(activeRoute === 'stats'),
+  //   route: 'stats',
+  // },
   {
     href: '/about/',
     label: currentUI.about || '关于我',

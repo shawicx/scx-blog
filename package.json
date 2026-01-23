@@ -16,11 +16,11 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.5",
+    "@astrojs/mdx": "^4.3.13",
     "@astrojs/partytown": "^2.1.4",
-    "@astrojs/sitemap": "^3.5.1",
+    "@astrojs/sitemap": "^3.7.0",
     "@waline/client": "^3.6.0",
-    "astro": "^5.13.7",
+    "astro": "^5.16.14",
     "astro-compress": "^2.3.8",
     "astro-og-canvas": "^0.7.0",
     "canvaskit-wasm": "^0.40.0",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.2",
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "0.9.6",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@lokesh.dhakar/quantize": "^1.4.0",

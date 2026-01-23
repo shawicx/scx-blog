@@ -14,7 +14,13 @@ build/
 .output/
 
 # Environment variables
-.env*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Keep example file
 !.env.example
 
 # IDE and editor files
@@ -62,8 +68,4 @@ config/
 secrets/
 
 # Astro-specific
-!.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+astro/
