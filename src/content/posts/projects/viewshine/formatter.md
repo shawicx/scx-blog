@@ -1,6 +1,6 @@
 ---
-title: 'Formatter 类深度解析'
-description: '优雅的字符串格式化工具'
+title: 'Formatter 类'
+description: '字符串格式化工具'
 draft: false
 published: 2025-08-09
 difficulty: 'advanced'
@@ -14,11 +14,11 @@ type: 'project'
 
 ## 解决的痛点
 
-在日常开发中，你是否遇到过这些场景：
+在日常开发中，我们可能遇到过这些场景：
 
 ```javascript
 // 传统的字符串拼接方式
-const userInfo = `${user.name}${user.age ? `（${user.age}岁）` : ''}${user.department ? `，${user.department}` : ''}`;
+const userInfo = `${user.name}：${user.age ? `（${user.age}岁）` : ''}${user.department ? `，${user.department}` : ''}`;
 const dateText = user.createTime ? dayjs(user.createTime).format('YYYY-MM-DD') : '';
 ```
 

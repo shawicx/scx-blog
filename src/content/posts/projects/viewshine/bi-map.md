@@ -1,10 +1,10 @@
 ---
-title: 'BI地图组件开发'
-description: 'BI系统中地图组件的状态码映射、数据处理和可视化实现方案'
+title: 'BIMap 工具类'
+description: '状态码映射、数据处理实现方案'
 draft: false
 published: 2025-08-09
 difficulty: 'advanced'
-tags: ['BI系统', '地图组件', '数据可视化', '状态映射', 'TypeScript']
+tags: ['状态映射', 'TypeScript']
 estimatedReadTime: 25
 category: 'projects'
 type: 'project'
