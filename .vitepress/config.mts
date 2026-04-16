@@ -140,13 +140,33 @@ function sidebarSnippet(): DefaultTheme.SidebarItem[] {
   ]
 }
 
+function siderbarWork(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: 'UniUbi',
+      collapsed: false,
+      items: [
+        { text: '语音播报', link: 'voice-speech' },
+      ]
+    },
+    {
+      text: 'ViewShine',
+      collapsed: false,
+      items: [
+        { text: '键值对', link: 'bi-map' },
+      ]
+    },
+  ]
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "docs",
-
+  head: [['link', { rel: 'icon', href: '/favicon/favicon.ico' }]],
   title: "小小前端",
   description: "",
   themeConfig: {
+    logo: '/favicon/favicon-32x32.png',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
@@ -156,6 +176,7 @@ export default defineConfig({
       { text: 'Vue', link: '/vue/data-flow.md', activeMatch: '/vue/' },
       { text: '综合', link: '/compre/nginx.md', activeMatch: '/compre/' },
       { text: '代码片段', link: '/snippet/array-process.md', activeMatch: '/snippet/' },
+      { text: '工作记录', link: '/work/bi-map.md', activeMatch: '/work/' },
       // { text: '前端工具', link: '/tools/git.md', activeMatch: '/tools/' },
     ],
 
@@ -184,6 +205,10 @@ export default defineConfig({
       '/snippet/': {
         base: '/snippet/',
         items: sidebarSnippet(),
+      },
+      '/work/': {
+        base: '/work/',
+        items: siderbarWork(),
       },
     },
 
