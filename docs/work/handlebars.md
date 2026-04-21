@@ -1,16 +1,4 @@
----
-title: ' Handlebars 简单使用'
-description: '将数据动态插入到模板'
-draft: false
-published: 2026-01-23
-difficulty: 'beginner' # beginner | intermediate | advanced
-tags: ['JavaScript', 'String']
-estimatedReadTime: 8 # minutes
-category: 'frontend'
-type: 'tutorial'
----
-
-# Handlebars 简单使用
+# Handlebars 基本使用
 
 Handlebars 是一个逻辑无关的模板引擎，通过简单的语法将数据动态地插入到模板中，生成最终的输出结果。这里基于 [scx-api-tool](https://github.com/shawicx/scx-api-tool.git) 介绍 Handlebars 的使用
 
@@ -18,19 +6,19 @@ Handlebars 是一个逻辑无关的模板引擎，通过简单的语法将数据
 
 ### 变量替换
 
-使用双大括号 `{{variable}}` 来插入变量值：
+使用双大括号 <span v-pre>`{{variable}}`</span> 来插入变量值：
 
-```handlebars
-Hello {{name}}!
+```typescript
+// Hello {{name}}!
 ```
 
 当传入数据 `{ name: "World" }` 时，输出 `Hello World!`。
 
 ### 条件渲染
 
-使用 `{{#if}}` 和 `{{/if}}` 进行条件渲染：
+使用 <span v-pre>`{{#if}}`</span> 和 <span v-pre>`{{/if}}`</span> 进行条件渲染：
 
-```handlebars
+```typescript
 {{#if isActive}}
   <p>User is active</p>
 {{else}}
@@ -40,9 +28,9 @@ Hello {{name}}!
 
 ### 循环遍历
 
-使用 `{{#each}}` 和 `{{/each}}` 遍历数组或对象：
+使用 <span v-pre>`{{#each}}`</span> 和 <span v-pre>`{{/each}}`</span> 遍历数组或对象：
 
-```handlebars
+```typescript
 <ul>
 {{#each items}}
   <li>{{this}}</li>
@@ -54,7 +42,7 @@ Hello {{name}}!
 
 助手函数提供了扩展模板功能的能力：
 
-```handlebars
+```typescript
 {{toLowerCase name}}
 {{eq a b}}
 {{httpMethod method}}
@@ -69,7 +57,7 @@ Handlebars.registerHelper('eq', (a: any, b: any) => a === b);
 
 ### 模板继承与 Partials
 
-partials 是可重用的模板片段，通过 `{{> partialName}}` 引入：
+partials 是可重用的模板片段，通过 <span v-pre>`{{> partialName}}`</span> 引入：
 
 ```handlebars
 {{> functionBody}}

@@ -1,15 +1,3 @@
----
-title: '语音播报技术实现方案'
-description: '从原生API到自定义polyfill，解决跨平台语音播报兼容性问题'
-draft: false
-published: 2025-08-09
-difficulty: 'advanced'
-tags: ['语音播报', 'Web Speech API', 'AudioContext', 'Polyfill', '跨平台兼容']
-estimatedReadTime: 20
-category: 'projects'
-type: 'project'
----
-
 # 语音播报
 
 ## 原生API

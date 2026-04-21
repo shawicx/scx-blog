@@ -28,7 +28,7 @@ function sidebarCss(): DefaultTheme.SidebarItem[] {
     },
     {
       text: '进阶',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: 'css 原子化与 css modules', link: 'atomic-css-and-css-modules' },
         { text: '渲染管线', link: 'rendering-pipeline' },
@@ -53,7 +53,9 @@ function sidebarEs(): DefaultTheme.SidebarItem[] {
       ]
     },
     {
-      text: '基础概念', collapsed: false, items: [
+      text: '基础概念',
+      collapsed: true,
+      items: [
         { text: '垃圾回收机制', link: 'garbage-collection' },
         { text: '事件循环', link: 'event-loop' },
         { text: '函数柯里化', link: 'curry' },
@@ -89,7 +91,7 @@ function sidebarReact(): DefaultTheme.SidebarItem[] {
     },
     {
       text: 'Diff算法',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: 'diff算法', link: 'diff-algorithm' },
         { text: 'Fiber 机制', link: 'fiber' },
@@ -97,14 +99,14 @@ function sidebarReact(): DefaultTheme.SidebarItem[] {
     },
     {
       text: 'Hooks',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: '闭包陷阱', link: 'closure-trap' },
       ]
     },
     {
       text: '高级进阶',
-      collapsed: false,
+      collapsed: true,
       items: [
         // { text: '闭包陷阱', link: 'closure-trap' },
       ]
@@ -147,18 +149,25 @@ function siderbarWork(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: '语音播报', link: 'voice-speech' },
+        { text: '深浅克隆', link: 'js-clone' },
       ]
     },
     {
       text: 'ViewShine',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: '键值对', link: 'bi-map' },
-        { text: 'handlebars 基本使用', link: 'handlebars' },
-        { text: '深浅克隆', link: 'js-clone' },
-        { text: '密码登录', link: 'password' },
+
       ]
     },
+    {
+      text: '个人项目',
+      collapsed: true,
+      items: [
+        { text: 'handlebars 基本使用', link: 'handlebars' },
+        { text: '密码登录', link: 'password' },
+      ]
+    }
   ]
 }
 
