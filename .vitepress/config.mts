@@ -154,6 +154,9 @@ function siderbarWork(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: '键值对', link: 'bi-map' },
+        { text: 'handlebars 基本使用', link: 'handlebars' },
+        { text: '深浅克隆', link: 'js-clone' },
+        { text: '密码登录', link: 'password' },
       ]
     },
   ]
