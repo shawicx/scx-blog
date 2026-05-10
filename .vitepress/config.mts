@@ -120,10 +120,19 @@ function sidebarCompre(): DefaultTheme.SidebarItem[] {
       text: '网络相关',
       collapsed: false,
       items: [
+        { text: 'HTTP 与 HTTPS', link: 'https' },
+        { text: 'Cookie', link: 'cookie' },
+        { text: '性能优化（React）', link: 'performance' },
+      ]
+    },
+    {
+      text: '工程化',
+      collapsed: true,
+      items: [
         { text: 'nginx 入门', link: 'nginx' },
         { text: 'Docker 入门', link: 'docker' },
         { text: 'pnpm VS npm', link: 'pnpm' },
-        { text: '性能优化（React）', link: 'performance' },
+        { text: 'Webpack 与 Vite', link: 'webpack-vite' },
       ]
     },
   ]
