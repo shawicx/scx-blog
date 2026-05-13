@@ -151,6 +151,18 @@ function sidebarSnippet(): DefaultTheme.SidebarItem[] {
   ]
 }
 
+function sidebarDataStructure(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: '基本概念',
+      collapsed: false,
+      items: [
+        { text: '堆、栈、队列、链表', link: 'stack-queue-heap-linkedlist' },
+      ]
+    },
+  ]
+}
+
 function siderbarWork(): DefaultTheme.SidebarItem[] {
   return [
     {
@@ -197,6 +209,7 @@ export default defineConfig({
       { text: 'Vue', link: '/vue/data-flow.md', activeMatch: '/vue/' },
       { text: '综合', link: '/compre/nginx.md', activeMatch: '/compre/' },
       { text: '代码片段', link: '/snippet/array-process.md', activeMatch: '/snippet/' },
+      { text: '数据结构', link: '/data-structure/stack-queue-heap-linkedlist.md', activeMatch: '/data-structure/' },
       { text: '工作记录', link: '/work/bi-map.md', activeMatch: '/work/' },
       // { text: '前端工具', link: '/tools/git.md', activeMatch: '/tools/' },
     ],
@@ -226,6 +239,10 @@ export default defineConfig({
       '/snippet/': {
         base: '/snippet/',
         items: sidebarSnippet(),
+      },
+      '/data-structure/': {
+        base: '/data-structure/',
+        items: sidebarDataStructure(),
       },
       '/work/': {
         base: '/work/',
