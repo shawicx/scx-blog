@@ -160,6 +160,13 @@ function sidebarDataStructure(): DefaultTheme.SidebarItem[] {
         { text: '堆、栈、队列、链表', link: 'stack-queue-heap-linkedlist' },
       ]
     },
+    {
+      text: '排序算法',
+      collapsed: false,
+      items: [
+        { text: '简单排序', link: 'simple-sorting' },
+      ]
+    },
   ]
 }
 
